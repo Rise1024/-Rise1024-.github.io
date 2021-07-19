@@ -2,7 +2,7 @@ markdown: kramdown
 kramdown:
   input: GFM
 permalink: /:year/:month/:title
-title: 东篱茶馆
+title: Rise1024.blog
 url: http://Rise1024.github.io
 # subscribe: http://Rise1024.github.io/feed
 exclude: [ README.md, newpost.rb ]
