@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db0dbdbd-82fc-47f0-a0df-ef18dc055b9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/links.md" beforeDir="false" afterPath="$PROJECT_DIR$/links.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tag.html" beforeDir="false" afterPath="$PROJECT_DIR$/tag.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_posts/2021-07-18-test.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/default.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/archive.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teawaiter.md" beforeDir="false" afterPath="$PROJECT_DIR$/teawaiter.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,8 +51,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1626677304393</updated>
-      <workItem from="1626677306530" duration="3362000" />
+      <workItem from="1626677306530" duration="9921000" />
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
