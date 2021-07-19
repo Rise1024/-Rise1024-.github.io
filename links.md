@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 茶香-Links
+title: LeetCode-Links
 permalink: /links/
 ---
 

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="db0dbdbd-82fc-47f0-a0df-ef18dc055b9b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/default.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-01-01-demo-test.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-08-Markdown-Support-By-Github.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-11-ai-classification.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-12-market-vs-industry.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-16-BLM.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-17-Disruptions-Innovation.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-17-Industry analysis.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-17-Scenarios-Insight.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-17-The fox and the Hedgehog.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-12-10-Mac_OS_X_ubuntu_usb_startup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-12-15-Mac_OS_X_usb_erase.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-08-Ubuntu-Quick-Start.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-11-LTE-UE-Attach.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-16-Write-Os-Orange.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-17-Tcpdump.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-18-Ubuntu-Upgrade-To-1710.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-21-2017-List-of-National-Excellent-Popular-Science-Works.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-26-python-core-program-ch2.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-28-ctags-cscope.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-30-mac-open-app.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-01-31-jupyter-notebook.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-04-24-about-blockchain.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-04-25-issue-test.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-04-26-about-blogcounter.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-04-28-about-logic.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-05-03-github-work-together.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-05-27-graph-databases-foreword.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-05-27-graph-databases-tableofcontents.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-06-04-mac-vim-python.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-06-27-design-pattern.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-abstract-factory.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-facade.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-factory-function.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-simple-factory-uml.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-simple-factory.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-07-03-design-pattern-single-instance.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-07-12-cardbang.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-08-05-Beacon.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-08-22-wpa-ctrl-if-eloop.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-08-29-about-time-management.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-09-25-gnu-radio.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-10-09-mac-svn.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/archive.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/links.md" beforeDir="false" afterPath="$PROJECT_DIR$/links.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tag.html" beforeDir="false" afterPath="$PROJECT_DIR$/tag.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1vWUOABxYDTX89evqA5JPWESQyP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="db0dbdbd-82fc-47f0-a0df-ef18dc055b9b" name="Default Changelist" comment="" />
+      <created>1626677304393</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1626677304393</updated>
+      <workItem from="1626677306530" duration="2245000" />
+    </task>
+    <servers />
+  </component>
+</project>
