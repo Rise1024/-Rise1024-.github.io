@@ -12,3 +12,5 @@ email: brieftime@icloud.com
 safe: true
 excerpt_separator: "&nbsp;"
 highlight: true
+
+theme: jekyll-theme-cayman
