@@ -2,54 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db0dbdbd-82fc-47f0-a0df-ef18dc055b9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/themes/effector-wide/page.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/themes/effector-wide/page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-01-01-demo-test.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-08-Markdown-Support-By-Github.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-11-ai-classification.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-12-market-vs-industry.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-16-BLM.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-17-Disruptions-Innovation.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-17-Industry analysis.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-17-Scenarios-Insight.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-17-The fox and the Hedgehog.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-12-10-Mac_OS_X_ubuntu_usb_startup.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-12-15-Mac_OS_X_usb_erase.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-08-Ubuntu-Quick-Start.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-11-LTE-UE-Attach.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-16-Write-Os-Orange.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-17-Tcpdump.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-18-Ubuntu-Upgrade-To-1710.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-21-2017-List-of-National-Excellent-Popular-Science-Works.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-26-python-core-program-ch2.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-28-ctags-cscope.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-30-mac-open-app.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-01-31-jupyter-notebook.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-04-24-about-blockchain.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-04-25-issue-test.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-04-26-about-blogcounter.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-04-28-about-logic.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-05-03-github-work-together.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-05-27-graph-databases-foreword.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-05-27-graph-databases-tableofcontents.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-06-04-mac-vim-python.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-06-27-design-pattern.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-abstract-factory.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-facade.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-factory-function.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-simple-factory-uml.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-02-design-pattern-simple-factory.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-03-design-pattern-single-instance.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-12-cardbang.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-08-05-Beacon.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-08-22-wpa-ctrl-if-eloop.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-08-29-about-time-management.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-09-25-gnu-radio.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-10-09-mac-svn.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/archive.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/links.md" beforeDir="false" afterPath="$PROJECT_DIR$/links.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tag.html" beforeDir="false" afterPath="$PROJECT_DIR$/tag.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teawaiter.md" beforeDir="false" afterPath="$PROJECT_DIR$/teawaiter.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +47,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1626677304393</updated>
-      <workItem from="1626677306530" duration="2245000" />
+      <workItem from="1626677306530" duration="3362000" />
     </task>
     <servers />
   </component>
