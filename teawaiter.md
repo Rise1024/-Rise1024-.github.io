@@ -1,13 +1,13 @@
 ---
 layout: page
-title: 茶农-Grower
+title: 订阅
 permalink: /teawaiter/
 ---
-![](/upload/image/tanwubin.github.io.jpg){:width="950px"}
+![你应该是世界上最快乐的程序员，不是吗？](https://i.loli.net/2021/04/02/dgOR9ZhtvaHG5Es.png)
+{:width="950px"}
 
 ## Rise-Home ##
 
-![你应该是世界上最快乐的程序员，不是吗？](https://i.loli.net/2021/04/02/dgOR9ZhtvaHG5Es.png)
 
 ### 找到我
 
