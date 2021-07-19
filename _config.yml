@@ -3,12 +3,12 @@ kramdown:
   input: GFM
 permalink: /:year/:month/:title
 title: 东篱茶馆
-url: http://tanwubin.github.io
-subscribe: http://tanwubin.github.io/feed
+url: http://Rise1024.github.io
+# subscribe: http://Rise1024.github.io/feed
 exclude: [ README.md, newpost.rb ]
-domain: tanwubin.github.io
-author: tanwubin
-email: brieftime@icloud.com
+domain: Rise1024.github.io
+author: Rise1024
+email: 2467220117@qq.com
 safe: true
 excerpt_separator: "&nbsp;"
 highlight: true
