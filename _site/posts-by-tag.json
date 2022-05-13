@@ -24,11 +24,7 @@
       
       "./neural-network-optimization-methods.html",
       
-      "./ML-Library-from-scratch.html",
-      
-      "./conways-game-of-life.html",
-      
-      "./single-neuron-perceptron.html"
+      "./ML-Library-from-scratch.html"
       
     ]
   } ,
@@ -96,9 +92,7 @@
       
       "./neural-network-optimization-methods.html",
       
-      "./ML-Library-from-scratch.html",
-      
-      "./single-neuron-perceptron.html"
+      "./ML-Library-from-scratch.html"
       
     ]
   } ,
@@ -112,9 +106,7 @@
       
       "./back-to-basics.html",
       
-      "./ML-Library-from-scratch.html",
-      
-      "./single-neuron-perceptron.html"
+      "./ML-Library-from-scratch.html"
       
     ]
   } ,
@@ -136,9 +128,7 @@
       
       "./deep-q-learning-tic-tac-toe.html",
       
-      "./ML-Library-from-scratch.html",
-      
-      "./conways-game-of-life.html"
+      "./ML-Library-from-scratch.html"
       
     ]
   } ,
@@ -159,6 +149,18 @@
   "posts" : [
       
       "./starting-the-adventure.html"
+      
+    ]
+  } ,
+    
+      
+  {
+  "tag" : "测试",
+  "posts" : [
+      
+      "./conways-game-of-life.html",
+      
+      "./single-neuron-perceptron.html"
       
     ]
   } 
