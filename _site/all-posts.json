@@ -1,21 +1,7 @@
 {
   "posts" : [
     
-    "./AI-and-intellectual-property.html",
-    
-    "./back-to-basics.html",
-    
-    "./starting-the-adventure.html",
-    
-    "./deep-q-learning-tic-tac-toe.html",
-    
-    "./neural-network-optimization-methods.html",
-    
-    "./ML-Library-from-scratch.html",
-    
-    "./conways-game-of-life.html",
-    
-    "./single-neuron-perceptron.html"
+    "./%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html"
     
   ]
 }

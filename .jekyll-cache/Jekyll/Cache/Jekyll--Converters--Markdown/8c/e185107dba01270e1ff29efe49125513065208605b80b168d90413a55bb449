@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-16T15:46:34+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Rise小破站</title><subtitle>Rise1024的小破站</subtitle><author><name>Rise1024</name></author><entry><title type="html">单点登录机制</title><link href="http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" rel="alternate" type="text/html" title="单点登录机制" /><published>2022-02-17T03:32:20+08:00</published><updated>2022-02-17T03:32:20+08:00</updated><id>http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6</id><content type="html" xml:base="http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html"><![CDATA[<h3 id="什么是单点登录">什么是单点登录</h3>
+I"Z<h3 id="什么是单点登录">什么是单点登录</h3>
 
 <p>简称为 SSO，SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。</p>
 
@@ -69,4 +69,5 @@
 
 <p>那么我们如何解决这两个问题呢？针对第一个问题，sso登录以后，可以将Cookie的域设置为顶域，即.a.com，这样所有子域的系统都可以访问到顶域的Cookie。我们在设置Cookie时，只能设置顶域和自己的域，不能设置其他的域。比如：我们不能在自己的系统中给baidu.com的域设置Cookie。</p>
 
-<p>Cookie的问题解决了，我们就需要来看看session的问题。我们在sso系统登录了，这时再访问app1，Cookie也带到了app1的服务端（Server），app1的服务端怎么找到这个Cookie对应的Session呢？这里就要把3个系统的Session共享，如图所示。共享Session的解决方案有很多，例如：Spring-Session。这样第2个问题也解决了。</p>]]></content><author><name>Rise1024</name></author><category term="JAVA技术框架" /><summary type="html"><![CDATA[单点登录详解]]></summary></entry></feed>
+<p>Cookie的问题解决了，我们就需要来看看session的问题。我们在sso系统登录了，这时再访问app1，Cookie也带到了app1的服务端（Server），app1的服务端怎么找到这个Cookie对应的Session呢？这里就要把3个系统的Session共享，如图所示。共享Session的解决方案有很多，例如：Spring-Session。这样第2个问题也解决了。</p>
+:ET

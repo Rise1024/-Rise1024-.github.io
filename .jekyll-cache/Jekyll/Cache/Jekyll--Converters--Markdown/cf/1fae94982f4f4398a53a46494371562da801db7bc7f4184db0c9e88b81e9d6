@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-16T15:46:34+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Rise小破站</title><subtitle>Rise1024的小破站</subtitle><author><name>Rise1024</name></author><entry><title type="html">单点登录机制</title><link href="http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" rel="alternate" type="text/html" title="单点登录机制" /><published>2022-02-17T03:32:20+08:00</published><updated>2022-02-17T03:32:20+08:00</updated><id>http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6</id><content type="html" xml:base="http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html"><![CDATA[<h3 id="什么是单点登录">什么是单点登录</h3>
+I"K<h3 id="什么是单点登录">什么是单点登录</h3>
 
 <p>简称为 SSO，SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。</p>
 
@@ -17,27 +17,19 @@
 
 <p>如上图所示，我们在浏览器（Browser）中访问一个应用，这个应用需要登录，我们填写完用户名和密码后，完成登录认证。这时，我们在这个用户的session中标记登录状态为yes（已登录），同时在浏览器（Browser）中写入Cookie，这个Cookie是这个用户的唯一标识。下次我们再访问这个应用的时候，请求中会带上这个Cookie，服务端会根据这个Cookie找到对应的session，通过session来判断这个用户是否登录。如果不做特殊配置，这个Cookie的名字叫做jsessionid，值在服务端（server）是唯一的。</p>
 
-<blockquote>
-  <p>Cookie</p>
-</blockquote>
+<h4 id="cookie">Cookie</h4>
 
 <p>　　<strong><em>Cookie技术是http状态保持在客户端的解决方案</em></strong>，Cookie就是由服务器发给客户端的特殊信息，而这些信息以文本文件的方式存放在客户端，然后客户端每次向服务器发送请求的时候都会带上这些特殊的信息。</p>
 
-<blockquote>
-  <p>Cookie的内容、作用域以及有效期</p>
-</blockquote>
+<h4 id="cookie的内容作用域以及有效期">Cookie的内容、作用域以及有效期</h4>
 
 <p>　　cookie的内容主要包括：名字，值，过期时间，路径和域。路径与域合在一起就构成了cookie的作用范围。<strong><em>如果不设置过期时间，则表示这个cookie的生命期为浏览器会话期间，只要关闭浏览器窗口，cookie就消失了，这种生命期为浏览器会话期的 cookie被称为会话cookie。会话cookie一般不存储在硬盘上而是保存在内存里。如果设置了过期时间，浏览器就会把cookie保存到硬盘上，关闭后再次打开浏览器，这些cookie仍然有效直到超过设定的过期时间</em></strong>。</p>
 
-<blockquote>
-  <p>Session</p>
-</blockquote>
+<h4 id="session">Session</h4>
 
 <p>　　Session一般叫做回话，<strong><em>Session技术是http状态保持在服务端的解决方案</em></strong>，它是通过服务器来保持状态的。我们可以把客户端浏览器与服务器之间一系列交互的动作称为一个 Session。是服务器端为客户端所开辟的存储空间，在其中保存的信息就是用于保持状态。因此，session是解决http协议无状态问题的服务端解决方案，它能让客户端和服务端一系列交互动作变成一个完整的事务。</p>
 
-<blockquote>
-  <p>Session的创建</p>
-</blockquote>
+<h4 id="session的创建">Session的创建</h4>
 
 <p>　　那么Session在何时创建呢？当然还是在服务器端程序运行的过程中创建的，不同语言实现的应用程序有不同创建Session的方法。</p>
 
@@ -47,15 +39,11 @@
 
 <p>　　浏览器的关闭并不会导致Session的删除，只有当超时、程序调用HttpSession.invalidate()以及服务端程序关闭才会删除。</p>
 
-<blockquote>
-  <p>Cookie与Session的关系</p>
-</blockquote>
+<h4 id="cookie与session的关系">Cookie与Session的关系</h4>
 
 <p>　　cookie和session的方案虽然分别属于客户端和服务端，但是服务端的session的实现对客户端的cookie有依赖关系的，服务端执行session机制时候会生成session的id值，这个id值会发送给客户端，客户端每次请求都会把这个id值放到http请求的头部发送给服务端，而这个id值在客户端会保存下来，保存的容器就是cookie，因此当我们完全禁掉浏览器的cookie的时候，服务端的session也会不能正常使用。</p>
 
-<blockquote>
-  <p>同域单点登录</p>
-</blockquote>
+<h4 id="同域单点登录">同域单点登录</h4>
 
 <p>一个企业一般情况下只有一个域名，通过二级域名区分不同的系统。比如我们有个域名叫做：a.com，同时有两个业务系统分别为：app1.a.com和app2.a.com。我们要做单点登录（SSO），需要一个登录系统，叫做：sso.a.com。</p>
 
@@ -69,4 +57,5 @@
 
 <p>那么我们如何解决这两个问题呢？针对第一个问题，sso登录以后，可以将Cookie的域设置为顶域，即.a.com，这样所有子域的系统都可以访问到顶域的Cookie。我们在设置Cookie时，只能设置顶域和自己的域，不能设置其他的域。比如：我们不能在自己的系统中给baidu.com的域设置Cookie。</p>
 
-<p>Cookie的问题解决了，我们就需要来看看session的问题。我们在sso系统登录了，这时再访问app1，Cookie也带到了app1的服务端（Server），app1的服务端怎么找到这个Cookie对应的Session呢？这里就要把3个系统的Session共享，如图所示。共享Session的解决方案有很多，例如：Spring-Session。这样第2个问题也解决了。</p>]]></content><author><name>Rise1024</name></author><category term="JAVA技术框架" /><summary type="html"><![CDATA[单点登录详解]]></summary></entry></feed>
+<p>Cookie的问题解决了，我们就需要来看看session的问题。我们在sso系统登录了，这时再访问app1，Cookie也带到了app1的服务端（Server），app1的服务端怎么找到这个Cookie对应的Session呢？这里就要把3个系统的Session共享，如图所示。共享Session的解决方案有很多，例如：Spring-Session。这样第2个问题也解决了。</p>
+:ET

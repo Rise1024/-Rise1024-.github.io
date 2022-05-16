@@ -7,9 +7,9 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Rise小破站</title>
-	<link rel="canonical" href="http://localhost:4000/ipfs-404.html">
-	<meta name="description" content="Rise1024的小破站">
+	<title>单点登录机制 - Rise小破站</title>
+	<link rel="canonical" href="http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html">
+	<meta name="description" content="单点登录详解">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <script type="application/ld+json">
@@ -19,16 +19,16 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "http://localhost:4000"},
-  "headline": "Rise小破站",
-  "abstract": "",
-    "keywords": "",
-    "wordcount": "12",
-    "image": ["http://localhost:4000/assets/img"],
-  "datePublished": "",
-  "dateModified": "",
+  "headline": "单点登录机制",
+  "abstract": "单点登录详解",
+    "keywords": "JAVA技术框架",
+    "wordcount": "31",
+    "image": ["http://localhost:4000/assets/imgposts/20220516/fengmian.jpeg"],
+  "datePublished": "2022-02-17 03:32:20 +0800",
+  "dateModified": "2022-02-17 03:32:20 +0800",
   "author": {
     "@type": "Person",
-    "name": ""},
+    "name": "Rise1024"},
   "publisher": {
     "@type":  "Organization",
     "logo": {
@@ -40,30 +40,30 @@
 }
 </script>
 <!-- Open Graph data -->
-<meta property="og:url" content="http://localhost:4000/ipfs-404.html"/>
+<meta property="og:url" content="http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html"/>
 <meta property="og:type" content="article"/>
-<meta property="og:title" content="Rise小破站"/>
-<meta property="og:description" content=""/>
-<meta property="og:image" content="http://localhost:4000/assets/img"/>
-<meta property="og:image:alt" content=""/>
+<meta property="og:title" content="单点登录机制"/>
+<meta property="og:description" content="单点登录详解"/>
+<meta property="og:image" content="http://localhost:4000/assets/imgposts/20220516/fengmian.jpeg"/>
+<meta property="og:image:alt" content="单点登录机制"/>
 <meta property="og:site_name" content="Rise小破站" />
-<meta property="article:published_time" content="" />
-<meta property="article:modified_time" content="" />
-<meta property="article:tag" content="" />
+<meta property="article:published_time" content="2022-02-17 03:32:20 +0800" />
+<meta property="article:modified_time" content="2022-02-17 03:32:20 +0800" />
+<meta property="article:tag" content="JAVA技术框架" />
 <meta property="fb:admins" content="ar.maybach" />
 <!-- Schema.org markup for Google -->
-<meta itemprop="name" content="Rise小破站">
-<meta itemprop="description" content="">
-<meta itemprop="image" content="http://localhost:4000/assets/img">
+<meta itemprop="name" content="单点登录机制">
+<meta itemprop="description" content="单点登录详解">
+<meta itemprop="image" content="http://localhost:4000/assets/imgposts/20220516/fengmian.jpeg">
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="">
-<meta name="twitter:title" content="Rise小破站">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="单点登录机制">
+<meta name="twitter:description" content="单点登录详解">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="12"/>
-<meta name="twitter:image:src" content="http://localhost:4000/assets/img/">
+<meta data-rh="true" name="twitter:data1" content="31"/>
+<meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/20220516/fengmian.jpeg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
 	<!-- iOS Safari -->
@@ -127,10 +127,55 @@
 <link rel="apple-touch-icon" sizes="72x72" href="./assets/img/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="114x114" href="./assets/img/favicon/favicon.ico">
 	
+	<link rel="stylesheet" href="./assets/css/highlighter/syntax-base16.monokai.dark.css">
+	
 </head>
 
   <body>
-    <div class="flex-container transparent">
+    
+
+
+
+
+<section class="hidden">
+  <div class="post">
+      <a  class="post-list-title" href="./%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html">单点登录机制</a>
+      
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2022-02-17T03:32:20+08:00">February 17, 2022</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        less than 1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+        <div class="post-excerpt">
+            <h3 id="什么是单点登录">什么是单点登录</h3><p>简称为 SSO，SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。</p><p>单点登录基本流程如下：</p><p>1）当用户第一次访问应用系统的时候，因为还没有登录，会被引导到认证系统中进行登录；</p><p>2）根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据－－ticket；</p><p>3）用户再访问别的应用的时候，就会将这个ticket带上，作为自己认证的凭据，应用系统接受到请求之后会把ticket送到认证系统进行校验，检查ticket的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统2和应用系统3了。</p><p><img src="/assets/img/posts/20220516/dandian1.png" alt="posts/20220516/fengmian.jpeg" /></p><h3 id="普通的登录认证机制">普通的登录认证机制</h3><p><img src="/assets/img/posts/20220516/dandian2.png" alt="posts/20220516/fengmian.jpeg" /></p><p>如上图所示，我们在浏览器（Browser）中访问一个应用，这个应用需要登录，我们填写完用户名和密码后，完成登录认证。这时，我们在这个用户的session中标记登录状态为yes（已登录），同时在浏览器（Browser）中写入Cookie，这个Cookie是这个用户的唯一标识。下次我们再访问这个应用的时候，请求中会带上这个Cookie，服务端会根据这个Cookie找到对应的session，通过session来判断这个用户是否登录。如果不做特殊配置，这个Cookie的名字叫做jsessionid，值在服务端（server）是唯一的。</p><blockquote>  <p>Cookie</p></blockquote><p>　　<strong><em>Cookie技术是http状态保持在客户端的解决方案</em></strong>，Cookie就是由服务器发给客户端的特殊信息，而这些信息以文本文件的方式存放在客户端，然后客户端每次向服务器发送请求的时候都会带上这些特殊的信息。</p><blockquote>  <p>Cookie的内容、作用域以及有效期</p></blockquote><p>　　cookie的内容主要包括：名字，值，过期时间，路径和域。路径与域合在一起就构成了cookie的作用范围。<strong><em>如果不设置过期时间，则表示这个cookie的生命期为浏览器会话期间，只要关闭浏览器窗口，cookie就消失了，这种生命期为浏览器会话期的 cookie被称为会话cookie。会话cookie一般不存储在硬盘上而是保存在内存里。如果设置了过期时间，浏览器就会把cookie保存到硬盘上，关闭后再次打开浏览器，这些cookie仍然有效直到超过设定的过期时间</em></strong>。</p><blockquote>  <p>Session</p></blockquote><p>　　Session一般叫做回话，<strong><em>Session技术是http状态保持在服务端的解决方案</em></strong>，它是通过服务器来保持状态的。我们可以把客户端浏览器与服务器之间一系列交互的动作称为一个 Session。是服务器端为客户端所开辟的存储空间，在其中保存的信息就是用于保持状态。因此，session是解决http协议无状态问题的服务端解决方案，它能让客户端和服务端一系列交互动作变成一个完整的事务。</p><blockquote>  <p>Session的创建</p></blockquote><p>　　那么Session在何时创建呢？当然还是在服务器端程序运行的过程中创建的，不同语言实现的应用程序有不同创建Session的方法。</p><p>当客户端第一次请求服务端，当server端程序调用HttpServletRequest.getSession(true)这样的语句时的时候，服务器会为客户端创建一个session，并将通过特殊算法算出一个session的ID，用来标识该session对象。</p><p>　　Session存储在服务器的内存中(tomcat服务器通过StandardManager类将session存储在内存中)，也可以持久化到file，数据库，memcache，redis等。客户端只保存sessionid到cookie中，而不会保存session。</p><p>　　浏览器的关闭并不会导致Session的删除，只有当超时、程序调用HttpSession.invalidate()以及服务端程序关闭才会删除。</p><blockquote>  <p>Cookie与Session的关系</p></blockquote><p>　　cookie和session的方案虽然分别属于客户端和服务端，但是服务端的session的实现对客户端的cookie有依赖关系的，服务端执行session机制时候会生成session的id值，这个id值会发送给客户端，客户端每次请求都会把这个id值放到http请求的头部发送给服务端，而这个id值在客户端会保存下来，保存的容器就是cookie，因此当我们完全禁掉浏览器的cookie的时候，服务端的session也会不能正常使用。</p><blockquote>  <p>同域单点登录</p></blockquote><p>一个企业一般情况下只有一个域名，通过二级域名区分不同的系统。比如我们有个域名叫做：a.com，同时有两个业务系统分别为：app1.a.com和app2.a.com。我们要做单点登录（SSO），需要一个登录系统，叫做：sso.a.com。</p><p>我们只要在sso.a.com登录，app1.a.com和app2.a.com就也登录了。通过上面的登陆认证机制，我们可以知道，在sso.a.com中登录了，其实是在sso.a.com的服务端的session中记录了登录状态，同时在浏览器端（Browser）的sso.a.com下写入了Cookie。那么我们怎么才能让app1.a.com和app2.a.com登录呢？这里有两个问题：</p><p>Cookie是不能跨域的，我们Cookie的domain属性是sso.a.com，在给app1.a.com和app2.a.com发送请求是带不上的。</p><p>sso、app1和app2是不同的应用，它们的session存在自己的应用内，是不共享的。</p><p><img src="/assets/img/posts/20220516/dandian3.png" alt="posts/20220516/fengmian.jpeg" /></p><p>那么我们如何解决这两个问题呢？针对第一个问题，sso登录以后，可以将Cookie的域设置为顶域，即.a.com，这样所有子域的系统都可以访问到顶域的Cookie。我们在设置Cookie时，只能设置顶域和自己的域，不能设置其他的域。比如：我们不能在自己的系统中给baidu.com的域设置Cookie。</p><p>Cookie的问题解决了，我们就需要来看看session的问题。我们在sso系统登录了，这时再访问app1，Cookie也带到了app1的服务端（Server），app1的服务端怎么找到这个Cookie对应的Session呢？这里就要把3个系统的Session共享，如图所示。共享Session的解决方案有很多，例如：Spring-Session。这样第2个问题也解决了。</p><a class="read-more" href="./%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html"> read more</a>
+        </div>
+  </div>
+</section>
+<div class="flex-container transparent">
   
 
 
@@ -271,38 +316,188 @@
   setInterval(setTime, 1000);
   </script>
 
-  <div class="content wrapper">
-    <div class="center-tags">
-      
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="单点登录机制">
+<meta itemprop="description" content="单点登录详解">
+<meta itemprop="datePublished" content="2022-02-17T03:32:20+08:00">
 
+    <div class="page-image">
+      <div class="cover-image" style="background: url('./assets/img/posts/20220516/fengmian.jpeg') center no-repeat; background-size: cover;"></div>
+    </div>
+    <div class="wrapper">
+      <div class="page-content">
+        <div class="header-page">
+          <h1 class="page-title">单点登录机制</h1>
+          
+
+  <span class = "post-page-meta">
+  
+    <p class="page_meta">
+  
+  
+  
+    
       
+      <span class="page_meta-date">
+        <time datetime="2022-02-17T03:32:20+08:00">February 17, 2022</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        less than 1 minute read
+      
+    </span>
+  
+  
+    </p>
+  
+  </span>
+
+        </div>
+        <aside class="sidebar side" id="sidebar">
+    
 
 
 
 <div class="tag-cloud">
     
-        <ul class="tags">
+        <ul class="tags side">
             
-                
-                <li><a href="./tag.html?tag=JAVA%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6" class="tag">JAVA技术框架 <span>(1)</span></a></li>
+                <li><a href="./tag.html?tag=JAVA%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6" class="tag side">JAVA技术框架</a></li>
             
     
         </ul>
 </div>
-    </div>
+    <!--<div class="share-options side">-->
+<!--    <div class="share-hover side">-->
+<!--        <span class="share-button side"><svg fill="currentColor" width="25" height="25" class="side"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>-->
+<!--        <div class="share-icons side" id="sidebar-icons">-->
+<!--            <a class="twitter" href="https://twitter.com/intent/tweet?text=单点登录机制&url=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>-->
+<!--            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>-->
+<!--            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html&title=单点登录机制" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>-->
+<!--            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html&title=单点登录机制&summary=单点登录详解&source=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>-->
+<!--            <a class="email" href="mailto:?subject=单点登录机制&body=单点登录详解%0A%0ARead more here: http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>-->
+<!--            <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="side" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class='alert' style='font-size:.6em;color:var(&#45;&#45;accent);text-align:center;'></div>-->
+<!--</div>-->
+</aside>
+
+        
+        
+        <h3 id="什么是单点登录">什么是单点登录</h3>
+
+<p>简称为 SSO，SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。</p>
+
+<p>单点登录基本流程如下：</p>
+
+<p>1）当用户第一次访问应用系统的时候，因为还没有登录，会被引导到认证系统中进行登录；</p>
+
+<p>2）根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据－－ticket；</p>
+
+<p>3）用户再访问别的应用的时候，就会将这个ticket带上，作为自己认证的凭据，应用系统接受到请求之后会把ticket送到认证系统进行校验，检查ticket的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统2和应用系统3了。</p>
+
+<p><img src="/assets/img/posts/20220516/dandian1.png" alt="posts/20220516/fengmian.jpeg" /></p>
+<h3 id="普通的登录认证机制">普通的登录认证机制</h3>
+
+<p><img src="/assets/img/posts/20220516/dandian2.png" alt="posts/20220516/fengmian.jpeg" /></p>
+
+<p>如上图所示，我们在浏览器（Browser）中访问一个应用，这个应用需要登录，我们填写完用户名和密码后，完成登录认证。这时，我们在这个用户的session中标记登录状态为yes（已登录），同时在浏览器（Browser）中写入Cookie，这个Cookie是这个用户的唯一标识。下次我们再访问这个应用的时候，请求中会带上这个Cookie，服务端会根据这个Cookie找到对应的session，通过session来判断这个用户是否登录。如果不做特殊配置，这个Cookie的名字叫做jsessionid，值在服务端（server）是唯一的。</p>
+
+<blockquote>
+  <p>Cookie</p>
+</blockquote>
+
+<p>　　<strong><em>Cookie技术是http状态保持在客户端的解决方案</em></strong>，Cookie就是由服务器发给客户端的特殊信息，而这些信息以文本文件的方式存放在客户端，然后客户端每次向服务器发送请求的时候都会带上这些特殊的信息。</p>
+
+<blockquote>
+  <p>Cookie的内容、作用域以及有效期</p>
+</blockquote>
+
+<p>　　cookie的内容主要包括：名字，值，过期时间，路径和域。路径与域合在一起就构成了cookie的作用范围。<strong><em>如果不设置过期时间，则表示这个cookie的生命期为浏览器会话期间，只要关闭浏览器窗口，cookie就消失了，这种生命期为浏览器会话期的 cookie被称为会话cookie。会话cookie一般不存储在硬盘上而是保存在内存里。如果设置了过期时间，浏览器就会把cookie保存到硬盘上，关闭后再次打开浏览器，这些cookie仍然有效直到超过设定的过期时间</em></strong>。</p>
+
+<blockquote>
+  <p>Session</p>
+</blockquote>
+
+<p>　　Session一般叫做回话，<strong><em>Session技术是http状态保持在服务端的解决方案</em></strong>，它是通过服务器来保持状态的。我们可以把客户端浏览器与服务器之间一系列交互的动作称为一个 Session。是服务器端为客户端所开辟的存储空间，在其中保存的信息就是用于保持状态。因此，session是解决http协议无状态问题的服务端解决方案，它能让客户端和服务端一系列交互动作变成一个完整的事务。</p>
+
+<blockquote>
+  <p>Session的创建</p>
+</blockquote>
+
+<p>　　那么Session在何时创建呢？当然还是在服务器端程序运行的过程中创建的，不同语言实现的应用程序有不同创建Session的方法。</p>
+
+<p>当客户端第一次请求服务端，当server端程序调用HttpServletRequest.getSession(true)这样的语句时的时候，服务器会为客户端创建一个session，并将通过特殊算法算出一个session的ID，用来标识该session对象。</p>
+
+<p>　　Session存储在服务器的内存中(tomcat服务器通过StandardManager类将session存储在内存中)，也可以持久化到file，数据库，memcache，redis等。客户端只保存sessionid到cookie中，而不会保存session。</p>
+
+<p>　　浏览器的关闭并不会导致Session的删除，只有当超时、程序调用HttpSession.invalidate()以及服务端程序关闭才会删除。</p>
+
+<blockquote>
+  <p>Cookie与Session的关系</p>
+</blockquote>
+
+<p>　　cookie和session的方案虽然分别属于客户端和服务端，但是服务端的session的实现对客户端的cookie有依赖关系的，服务端执行session机制时候会生成session的id值，这个id值会发送给客户端，客户端每次请求都会把这个id值放到http请求的头部发送给服务端，而这个id值在客户端会保存下来，保存的容器就是cookie，因此当我们完全禁掉浏览器的cookie的时候，服务端的session也会不能正常使用。</p>
+
+<blockquote>
+  <p>同域单点登录</p>
+</blockquote>
+
+<p>一个企业一般情况下只有一个域名，通过二级域名区分不同的系统。比如我们有个域名叫做：a.com，同时有两个业务系统分别为：app1.a.com和app2.a.com。我们要做单点登录（SSO），需要一个登录系统，叫做：sso.a.com。</p>
+
+<p>我们只要在sso.a.com登录，app1.a.com和app2.a.com就也登录了。通过上面的登陆认证机制，我们可以知道，在sso.a.com中登录了，其实是在sso.a.com的服务端的session中记录了登录状态，同时在浏览器端（Browser）的sso.a.com下写入了Cookie。那么我们怎么才能让app1.a.com和app2.a.com登录呢？这里有两个问题：</p>
+
+<p>Cookie是不能跨域的，我们Cookie的domain属性是sso.a.com，在给app1.a.com和app2.a.com发送请求是带不上的。</p>
+
+<p>sso、app1和app2是不同的应用，它们的session存在自己的应用内，是不共享的。</p>
+
+<p><img src="/assets/img/posts/20220516/dandian3.png" alt="posts/20220516/fengmian.jpeg" /></p>
+
+<p>那么我们如何解决这两个问题呢？针对第一个问题，sso登录以后，可以将Cookie的域设置为顶域，即.a.com，这样所有子域的系统都可以访问到顶域的Cookie。我们在设置Cookie时，只能设置顶域和自己的域，不能设置其他的域。比如：我们不能在自己的系统中给baidu.com的域设置Cookie。</p>
+
+<p>Cookie的问题解决了，我们就需要来看看session的问题。我们在sso系统登录了，这时再访问app1，Cookie也带到了app1的服务端（Server），app1的服务端怎么找到这个Cookie对应的Session呢？这里就要把3个系统的Session共享，如图所示。共享Session的解决方案有很多，例如：Spring-Session。这样第2个问题也解决了。</p>
+
+        <aside class="sidebar inline" id="post-end">
     
 
 
 
+<div class="tag-cloud">
+    
+        <ul class="tags inline">
+            
+                <li><a href="./tag.html?tag=JAVA%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6" class="tag inline">JAVA技术框架</a></li>
+            
+    
+        </ul>
+</div>
+    <!--<div class="share-options inline">-->
+<!--    <div class="share-hover inline">-->
+<!--        <span class="share-button inline"><svg fill="currentColor" width="25" height="25" class="inline"><g fill-rule="evenodd"><path d="M15.6 5a.42.42 0 0 0 .17-.3.42.42 0 0 0-.12-.33l-2.8-2.79a.5.5 0 0 0-.7 0l-2.8 2.8a.4.4 0 0 0-.1.32c0 .12.07.23.16.3h.02a.45.45 0 0 0 .57-.04l2-2V10c0 .28.23.5.5.5s.5-.22.5-.5V2.93l2.02 2.02c.08.07.18.12.3.13.11.01.21-.02.3-.08v.01"></path><path d="M18 7h-1.5a.5.5 0 0 0 0 1h1.6c.5 0 .9.4.9.9v10.2c0 .5-.4.9-.9.9H6.9a.9.9 0 0 1-.9-.9V8.9c0-.5.4-.9.9-.9h1.6a.5.5 0 0 0 .35-.15A.5.5 0 0 0 9 7.5a.5.5 0 0 0-.15-.35A.5.5 0 0 0 8.5 7H7a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"></path></g></svg></span>-->
+<!--        <div class="share-icons inline" id="post-end-icons">-->
+<!--            <a class="twitter" href="https://twitter.com/intent/tweet?text=单点登录机制&url=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>-->
+<!--            <a class="facebook" href="https://facebook.com/sharer.php?u=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>-->
+<!--            <a class="reddit" href="http://www.reddit.com/submit?url=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html&title=单点登录机制" title="Submit to Reddit" rel="nofollow" target="_blank"><i class="fa fa-reddit" aria-hidden="true"></i></a>-->
+<!--            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html&title=单点登录机制&summary=单点登录详解&source=http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" title="Share on LinkedIn" rel="nofollow" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>-->
+<!--            <a class="email" href="mailto:?subject=单点登录机制&body=单点登录详解%0A%0ARead more here: http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" title="Share via e-mail" rel="nofollow" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>-->
+<!--            <a class="copy-link" onclick="copyToClipboard()" title="Copy to clipboard" rel="nofollow" target="_blank"><svg width="20px" fill="currentColor" class="inline" viewBox="0 0 18 18"><path d="M16.94 1.1A3.7 3.7 0 0 0 14.3 0c-1 0-1.94.39-2.64 1.1L7.43 5.3c-.91.92-2.09 3.2 0 5.27a.75.75 0 0 0 .82.16c.09-.03.17-.09.24-.15a.74.74 0 0 0 0-1.06c-1.16-1.15-.77-2.39-.02-3.16l4.24-4.22a2.2 2.2 0 0 1 1.58-.65c.6 0 1.16.23 1.58.65.86.87.86 2.29 0 3.16L12.7 8.47a.74.74 0 0 0 1.04 1.05l3.17-3.16a3.73 3.73 0 0 0 0-5.27h.03zM9.54 7.4a.74.74 0 0 0 0 1.06c1.16 1.15.76 2.39 0 3.16l-4.22 4.22c-.42.42-.99.65-1.59.65a2.23 2.23 0 0 1-1.58-3.82l3.17-3.16A.73.73 0 0 0 5.54 9a.78.78 0 0 0-.22-.52.77.77 0 0 0-1.05 0L1.1 11.64A3.72 3.72 0 0 0 3.74 18c1 0 1.94-.39 2.65-1.1l4.23-4.2c.21-.22.94-1.02 1.13-2.2.18-1.12-.2-2.15-1.12-3.07-.27-.27-.78-.27-1.06 0l-.02-.02z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class='alert' style='font-size:.6em;color:var(&#45;&#45;accent);text-align:center;'></div>-->
+<!--</div>-->
+</aside>
 
-<a href="./">
-    <picture>
-      <source srcset="./assets/img/404_small.jpg" media="(max-width: 768px)">
-      <source srcset="./assets/img/404.jpg">
-      <img src="./assets/img/404.jpg" alt="Page not found" class="pnf-image" style="width:100vw;max-width:unset;margin-left:calc((100% - 100vw)/2);margin-top:-16.5px;">
-    </picture>
-</a>
-
+        <div class="separator"></div>
+        
 
 
 
@@ -344,13 +539,52 @@
   </div>
 </div> <!-- End Recent-Box -->
 
-<form class="search-form inline">
-    <div id="search-container">
-        <input type="text" id="search-input" class="search" placeholder="Search">
+        
+
+
+
+<section class="author-box">
+  <div class="narrow-column">
+    <a href=''><img src="./assets/img/Myself_Neon_grey.jpg" alt="Rise1024" class="author-img"></a>
+    <ul class="contact-icons">
+      
+      
+      
+      <li class="github"><a class="github" href="http://github.com/Rise1024" target="_blank"><i class="fa fa-github"></i></a></li>
+      
+      
+      <li class="email"><a class="email" href="mailto:2467220117@qq.com"><i class="fa fa-envelope-o"></i></a></li>
+      
+      
+    </ul>
+  </div>
+  <div class="author-desc">
+    <h3>Rise1024</h3>
+    <p>此人很懒，还没有写介绍</p>
+  </div>
+</section>
+
+        <!-- Gitalk评论  -->
+<!--        <div id="gitalk-container"></div>-->
+<!--          <link rel="stylesheet" href="./assets/css/gitalk.css">-->
+<!--          <script src="./assets/js/gitalk.min.js"></script>-->
+<!--          <script type="text/javascript">-->
+<!--                  var title = location.pathname.substr(0, 50);-->
+<!--                  var gitalk = new Gitalk({-->
+<!--          clientID: `240367264af7a03d2785`,-->
+<!--          clientSecret: `eea31f0c3614d100bc9a1a3eb097846c6367a680`,-->
+<!--          repo: `Rise1024.github.io`,-->
+<!--          owner: 'Rise1024',-->
+<!--          admin: ['Rise1024'],-->
+<!--          id: title,-->
+<!--          proxy: '',-->
+<!--      });-->
+<!--      gitalk.render('gitalk-container');-->
+<!-- </script>-->
+      </div>
     </div>
-</form>
-<ul id="results-container" class="results-search"></ul>
-    <div class="search-box">
+  </article>
+  <div class="search-box">
   <div class="wrapper">
     <div class="search-grid">
       <form class="search-form">
@@ -366,12 +600,6 @@
   </div>
 </div>
 
-    <div class="pagination clearfix">
-  
-  
-</div>
-
-  </div> <!-- End Wrapper -->
   
 
 
@@ -410,7 +638,8 @@
 </footer> <!-- End Footer -->
 
 
-</div><!-- End flex-container -->
+</div>
+
     <div class="top" title="Top">
       <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="angle-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" class="svg-inline--fa fa-angle-up fa-w-8 fa-2x"><path fill="currentColor" d="M136.5 185.1l116 117.8c4.7 4.7 4.7 12.3 0 17l-7.1 7.1c-4.7 4.7-12.3 4.7-17 0L128 224.7 27.6 326.9c-4.7 4.7-12.3 4.7-17 0l-7.1-7.1c-4.7-4.7-4.7-12.3 0-17l116-117.8c4.7-4.6 12.3-4.6 17 .1z" class=""></path></svg>
     </div>
@@ -532,9 +761,78 @@
 <script src="./assets/js/jquery-3.6.0.min.js"></script>
 
 
+  <script>
+    function toggle_comments(){
+        document.getElementById('comment-curtain').classList.toggle('hide')
+        document.getElementById('disqus_thread').classList.toggle('show')
+    }
+
+    function copyToClipboard() {
+      navigator.clipboard.writeText('http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html').then(function() {
+      alerts = document.getElementsByClassName('alert')
+      for (i=0; i < alerts.length; i++){
+        alerts[i].innerHTML='\u00ABlink copied\u00BB';
+        setTimeout((function(i){ return function(){alerts[i].innerHTML='';}})(i), 1600 );
+      };
+      }, function() {
+        prompt("Unable to copy, please use this link:", "http://localhost:4000/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html");
+      });
+    }
+
+    $(function () {
+      if (document.getElementById('comment-curtain') == null){
+        document.getElementById('disqus_thread').classList.toggle('show')
+      }
+
+      var tweetTags = document.getElementsByTagName("tweet");
+
+      if (tweetTags != null){
+        for (i=0; i<tweetTags.length; i++){
+          tweetA = document.createElement("a")
+          tweetA.href = 'https://twitter.com/share?text='
+                       + encodeURIComponent(tweetTags[i].textContent)
+                       + '&via=&url='
+                       + window.location.href;
+          tweetA.target = "_blank";
+          tweetA.className = 'twitter';
+          tweetSpanText = document.createElement('span');
+          tweetSpanText.className = 'tweetText';
+          tweetSpanText.appendChild(document.createTextNode(tweetTags[i].textContent));
+          tweetSpanIcon = document.createElement('span');
+          tweetSpanIcon.className = 'tweetIcon';
+          tweetSpanIcon.appendChild(document.createTextNode("click to tweet"));
+          tweetI = document.createElement("i");
+          tweetI.className = 'fa fa-twitter';
+          tweetSpanIcon.appendChild(tweetI);
+          tweetA.appendChild(tweetSpanText);
+          tweetA.appendChild(tweetSpanIcon);
+          tweetTags[i].textContent = "";
+          tweetTags[i].appendChild(tweetA);
+        }
+      }
+
+    });
+
+  </script>
+  <!-- Mailchimp linking -->
+  <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/8ece198b3eb260e6838461a60/d20d9fb9aad962399025da52e.js");</script>
 
 
 
+
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "CommonHTML": { linebreaks: { automatic: true } }
+    });
+  </script>
+  <script src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
 <script src="./assets/js/main.js"></script>
@@ -552,88 +850,6 @@
 
 
 
-
-  <script class="deep-dir">
-    function fixPath() {
-      var own_url = window.location.href;
-      var countOfSlashes = (own_url.match(/\//g) || []).length;
-      var minimumSlashes = 3;
-      var i = 0;
-      var replaceStr = "";
-      if (own_url.includes("/ipfs/")) {
-        minimumSlashes = 5;
-      }
-      if (countOfSlashes > minimumSlashes) {
-        var relativeBase = "";
-        for (i = minimumSlashes; i < countOfSlashes; i++) {
-          relativeBase = relativeBase + "../";
-        }
-        var elements = document.getElementsByTagName("link");
-        for (i = 0; i < elements.length; i++) {
-          replaceStr = elements[i].getAttribute("href");
-          if (replaceStr != null && replaceStr.includes("./")) {
-            replaceStr = replaceStr.replace(/\.\//g, relativeBase);
-            elements[i].setAttribute("href", replaceStr);
-          }
-        }
-        elements = document.getElementsByTagName("a");
-        for (i = 0; i < elements.length; i++) {
-          replaceStr = elements[i].getAttribute("href");
-          if (replaceStr != null && replaceStr.includes("./")) {
-            replaceStr = replaceStr.replace(/\.\//g, relativeBase);
-            elements[i].setAttribute("href", replaceStr);
-          }
-          if (elements[i].style.background!=null) {
-            elements[i].style.background = elements[i].style.background.replace("./", relativeBase);
-          }
-        }
-        elements = document.getElementsByTagName("img");
-        for (i = 0; i < elements.length; i++) {
-          replaceStr = elements[i].getAttribute("src");
-          if (replaceStr != null && replaceStr.includes("./")) {
-            replaceStr = replaceStr.replace(/\.\//g, relativeBase);
-            elements[i].setAttribute("src", replaceStr);
-          }
-        }
-        elements = document.getElementsByTagName("source");
-        for (i = 0; i < elements.length; i++) {
-          replaceStr = elements[i].getAttribute("srcset");
-          if (replaceStr != null && replaceStr.includes("./")) {
-            replaceStr = replaceStr.replace(/\.\//g, relativeBase);
-            elements[i].setAttribute("srcset", replaceStr);
-          }
-        }
-        elements = document.getElementsByTagName("script");
-        var newScript = new Array;
-        var newScriptLenght = 0;
-        for (i = 0; i < elements.length; i++) {
-          if (elements[i].className != "deep-dir") {
-            replaceStr = elements[i].getAttribute("src");
-            if (replaceStr != null && replaceStr.includes("./")) {
-              replaceStr = replaceStr.replace(/\.\//g, relativeBase);
-              newScriptLenght = newScript.push(document.createElement("script"));
-              newScript[newScriptLenght - 1].setAttribute("src", replaceStr);
-            } else {
-              if (elements[i].innerHTML != null && elements[i].innerHTML.includes("./")) {
-                newScriptLenght = newScript.push(document.createElement("script"));
-                newScript[newScriptLenght - 1].innerHTML = elements[i].innerHTML.replace("./", relativeBase);
-              }
-            }
-          }
-        }
-        for (i = 0; i < newScript.length; i++) {
-          if (newScript[i].innerHTML == "") {
-            document.body.appendChild(newScript[i]);
-          } else {
-            setTimeout(function(newScript) {
-              document.body.appendChild(newScript);
-            }, 1000, newScript[i]);
-          }
-        }
-      }
-    }
-    fixPath();
-  </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R8SZS2YBZK"></script>
