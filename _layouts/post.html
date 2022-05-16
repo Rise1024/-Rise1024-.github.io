@@ -35,21 +35,22 @@ layout: default
         {% include recent-post.html %}
         {% include author-box.html %}
         <!-- Gitalk评论  -->
-        <div id="gitalk-container"></div>
-          <link rel="stylesheet" href="{{ relativebase }}assets/css/gitalk.css">
-          <script src="{{ relativebase }}assets/js/gitalk.min.js"></script>
-          <script type="text/javascript">
-                  var title = location.pathname.substr(0, 50);
-                  var gitalk = new Gitalk({
-          clientID: `240367264af7a03d2785`,
-          clientSecret: `eea31f0c3614d100bc9a1a3eb097846c6367a680`,
-          repo: `Rise1024.github.io`,
-          owner: 'Rise1024',
-          admin: ['Rise1024'],
-          id: title,
-      });
-      gitalk.render('gitalk-container');
- </script>
+<!--        <div id="gitalk-container"></div>-->
+<!--          <link rel="stylesheet" href="{{ relativebase }}assets/css/gitalk.css">-->
+<!--          <script src="{{ relativebase }}assets/js/gitalk.min.js"></script>-->
+<!--          <script type="text/javascript">-->
+<!--                  var title = location.pathname.substr(0, 50);-->
+<!--                  var gitalk = new Gitalk({-->
+<!--          clientID: `240367264af7a03d2785`,-->
+<!--          clientSecret: `eea31f0c3614d100bc9a1a3eb097846c6367a680`,-->
+<!--          repo: `Rise1024.github.io`,-->
+<!--          owner: 'Rise1024',-->
+<!--          admin: ['Rise1024'],-->
+<!--          id: title,-->
+<!--          proxy: '',-->
+<!--      });-->
+<!--      gitalk.render('gitalk-container');-->
+<!-- </script>-->
       </div>
     </div>
   </article>
