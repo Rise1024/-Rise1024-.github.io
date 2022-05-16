@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-<!--<link rel="stylesheet" href="/assets/css/gitalk.css">-->
-<!--<script src="/assets/js/gitalk.min.js"></script>-->
 {% include calculate_relative_base.html %}
 {% capture post_url %}{{ relativebase }}{{ page.url }}{% endcapture %}
 {% assign post_url = post_url | replace: "//", "/" %}
@@ -15,24 +13,6 @@ layout: default
         </div>
   </div>
 </section>
-<!-- Gitalk 评论 start  -->
-<!--<div id="gitalk-container"></div>-->
-<!--<script type="text/javascript">-->
-<!--      var title = location.pathname.substr(0, 50);//截取路径的前50个字符作为标识符-->
-<!--      var gitalk = new Gitalk({-->
-
-<!--      // gitalk的主要参数-->
-<!--          clientID: `这里插入你申请到的clientID `,-->
-<!--          clientSecret: `这里插入你申请到的clientSecret`,-->
-<!--          repo: `你的博客仓库`,-->
-<!--          owner: '就是你了',-->
-<!--          admin: ['你的github账户名，不是昵称'],-->
-<!--          id: title,//因为这里不能超过50字符，所以做了处理，当超过50时自动截取前50-->
-
-<!--      });-->
-<!--      gitalk.render('gitalk-container');-->
-<!--      </script>-->
-<!-- Gitalk end -->
 <div class="flex-container transparent">
   {% include header.html %}
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
@@ -52,12 +32,26 @@ layout: default
         {{page.content | markdownify}}
         {% include sidebar.html context="post" class="inline" id="post-end" %}
         <div class="separator"></div>
-        {% include author-box.html %}
         {% include recent-post.html %}
-        {% include newsletter.html %}
-        {% include disqus.html %}
+        {% include author-box.html %}
+        <!-- Gitalk评论  -->
+        <div id="gitalk-container"></div>
+          <link rel="stylesheet" href="{{ relativebase }}assets/css/gitalk.css">
+          <script src="{{ relativebase }}assets/js/gitalk.min.js"></script>
+          <script type="text/javascript">
+                  var title = location.pathname.substr(0, 50);
+                  var gitalk = new Gitalk({
+          clientID: `240367264af7a03d2785`,
+          clientSecret: `eea31f0c3614d100bc9a1a3eb097846c6367a680`,
+          repo: `Rise1024.github.io`,
+          owner: 'Rise1024',
+          admin: ['Rise1024'],
+          id: title,
+      });
+      gitalk.render('gitalk-container');
+ </script>
       </div>
-    </div> <!-- End Wrapper -->
+    </div>
   </article>
   {% include search.html %}
   {% include footer.html %}
