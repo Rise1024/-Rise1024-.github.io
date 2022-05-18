@@ -300,7 +300,7 @@
     
       
       <span class="page_meta-date">
-        <time datetime="2022-02-17T03:32:20+08:00">February 17, 2022</time>
+        <time datetime="2022-05-17T03:32:20+08:00">May 17, 2022</time>
       </span>
     
     
@@ -400,6 +400,133 @@
 		</div>
 	</div>
 
+	
+	<div id="设计模式" class="hidden tag-master">
+		<h1>设计模式</h1>
+		<div class="archive">
+			<div class="post-list">
+		    
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html">7大设计原则</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2022-05-19T03:32:20+08:00">May 19, 2022</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        9 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<h2 id="合成复用原则">合成复用原则</h2> <p>合成（组合）/ 聚合复用原则</p> <p><strong>定义</strong>：尽量使用对象组合/聚合，而不是继承关系达到软件复用的目的</p> <ul> <li>聚合 has-A</li> <li>组合 contains-A</li> <li>继承 is-A</li> </ul> <p><strong>优点</strong>：可以使系统更加灵活，降低类与类之间的耦合度，一个类的变化对其他类造成的影响相对较少</p> <h4 id="何时使用合成聚合继承">何时使用合成/聚合、继承</h4> <p>聚合：大雁去群的例子；笔记本和 U 盘，笔记本没了，U 盘还能独立存在 组合：集成显卡和笔记本，显卡坏了，你电脑也不能用了，看不见，不能操作了</p> <p>代码场景：a 类中有一个 b类的引用</p> <ul> <li>聚合：除了 a 类以外，还有其他地方对 b 类的引用，就算 a 类结束了，b 还存活着</li> <li>组合：只有 a 类引用，那么当 a 类结束时， b 类跟着一起结束</li> </ul> <h4 id="coding">Coding</h4> <p>场景：Dao 层获取数据库连接；</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBConnection</span> <span class="o">{</span> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"使用 Mysql 数据库连接"</span><span class="o">;</span> <span class="o">}</span> <span class="o">}</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProductDao</span> <span class="kd">extends</span> <span class="nc">DBConnection</span> <span class="o">{</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addProduct</span><span class="o">()</span> <span class="o">{</span> <span class="nc">String</span>...<a class="read-more" href="./%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html">设计模式二:外观模式</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2022-05-19T03:32:20+08:00">May 19, 2022</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        less than 1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<h2 id="初识外观模式">初识外观模式</h2> <h3 id="定义">定义：</h3> <p>为子系统中<code class="language-plaintext highlighter-rouge">一组接口</code>提供一个<code class="language-plaintext highlighter-rouge">一致的界面</code>，Facade模式定义了<code class="language-plaintext highlighter-rouge">一个高层接口</code>，这个接口使得这一子系统<code class="language-plaintext highlighter-rouge">更加容易使用</code></p> <h3 id="结构和说明">结构和说明：</h3> <p><img src="/assets/img/posts/20220518/design_pattern/facade/1.jpg" alt="" /></p> <p><strong>界面：</strong>从客户端来看待这个系统，能看到的东西 <strong>Facade ：</strong> 定义子系统的多个模块对外的高层接口，通常需要调用内部多个模块，从而<code class="language-plaintext highlighter-rouge">把客户的请求代理给适当的子系统对象</code>。 <strong>模块：</strong>接收Facade对象的委派，真正实现功能，各个模块之间可能有交互。<code class="language-plaintext highlighter-rouge">☂注意：</code>Facade对象知道各个模块，但是各个模块不应该知道Facade对象</p> <hr /> <h2 id="体会外观模式">体会外观模式</h2> <h3 id="生活中的示列组装电脑">生活中的示列：组装电脑</h3> <ol> <li> <p>完全自己组装 <img src="/assets/img/posts/20220518/design_pattern/facade/2.jpg" alt="" /></p> </li> <li> <p>找专业装机公司组装 <img src="/assets/img/posts/20220518/design_pattern/facade/3.jpg" alt="" /></p> </li> </ol> <h3 id="工具示例代码生成工具">工具示例：代码生成工具</h3> <p><img src="/assets/img/posts/20220518/design_pattern/facade/4.jpg" alt="" /></p> <p><code class="language-plaintext highlighter-rouge">问题：</code>如果现在客户端需要使用这个代码生成工具来生成需要的基础代码，该如何来实现呢？</p> <h3 id="不用模式解决方案">不用模式解决方案</h3> <p><img src="/assets/img/posts/20220518/design_pattern/facade/5.jpg" alt="" /></p> <p><code class="language-plaintext highlighter-rouge">存在的问题：</code>客户端为了使用生成代码的功能，需要与生成代码子系统内部的多个模块交互</p> <h3 id="使用模式解决方案">使用模式解决方案</h3> <p><img src="/assets/img/posts/20220518/design_pattern/facade/6.jpg" alt="" /></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AModuleApi</span> <span class="o">{</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">();</span> <span class="o">}</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AModuleImpl</span> <span...<a class="read-more" href="./%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html"> read more</a>
+					</div>
+				</div>
+			
+			
+
+				<div class="post">
+					<a class="post-list-title" href="./%E5%88%9D%E8%AF%86%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html">设计模式一:初识简单工厂模式</a>
+					
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2022-05-19T03:32:20+08:00">May 19, 2022</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+					<div class="post-excerpt">
+						<h2 id="初识简单工厂">初识简单工厂</h2> <h3 id="定义">定义</h3> <p>提供一个创建对象实例的功能，而无需关心其具体实现。被构建实例的类型可以是接口、抽象类，也可以是具体的类</p> <h3 id="结构和说明">结构和说明</h3> <p>![]/assets/img/posts/20220518/design_pattern/simple_factory/img/posts/20220518/design_pattern/simple_factory/1.jpg)</p> <p><strong>APi：</strong> 定义客户所需要的功能接口</p> <p><strong>Impl：</strong> 具体实现Api的实现类，可能会有多个</p> <p><strong>Factory：</strong> 工厂，选择合适的实现类来创建Api的接口对象</p> <p><strong>Client：</strong> 客户端，通过Factory去获取Api接口对象，然后面向Api接口编程</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Api</span> <span class="o">{</span> <span class="kt">void</span> <span class="nf">operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">);</span> <span class="o">}</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImplA</span> <span class="kd">implements</span> <span class="nc">Api</span> <span class="o">{</span> <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"实现a:"</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span> <span class="o">}</span> <span class="o">}</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImplB</span> <span class="kd">implements</span> <span class="nc">Api</span> <span class="o">{</span> <span class="nd">@Override</span> <span class="kd">public</span> <span...<a class="read-more" href="./%E5%88%9D%E8%AF%86%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html"> read more</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
 <style>
 .spinner {
   margin: 100px auto;
@@ -471,6 +598,9 @@
             
                 
                 <li><a href="./tag.html?tag=JAVA%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6" class="tag">JAVA技术框架 <span>(1)</span></a></li>
+            
+                
+                <li><a href="./tag.html?tag=%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F" class="tag">设计模式 <span>(3)</span></a></li>
             
     
         </ul>

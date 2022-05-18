@@ -1,0 +1,1164 @@
+I"�D<h2 id="合成复用原则">合成复用原则</h2>
+
+<p>合成（组合）/ 聚合复用原则</p>
+
+<p><strong>定义</strong>：尽量使用对象组合/聚合，而不是继承关系达到软件复用的目的</p>
+
+<ul>
+  <li>聚合 has-A</li>
+  <li>组合 contains-A</li>
+  <li>继承 is-A</li>
+</ul>
+
+<p><strong>优点</strong>：可以使系统更加灵活，降低类与类之间的耦合度，一个类的变化对其他类造成的影响相对较少</p>
+
+<h4 id="何时使用合成聚合继承">何时使用合成/聚合、继承</h4>
+
+<p>聚合：大雁去群的例子；笔记本和 U 盘，笔记本没了，U 盘还能独立存在
+组合：集成显卡和笔记本，显卡坏了，你电脑也不能用了，看不见，不能操作了</p>
+
+<p>代码场景：a 类中有一个 b类的引用</p>
+<ul>
+  <li>聚合：除了 a 类以外，还有其他地方对 b 类的引用，就算 a 类结束了，b 还存活着</li>
+  <li>组合：只有 a 类引用，那么当 a 类结束时， b 类跟着一起结束</li>
+</ul>
+
+<h4 id="coding">Coding</h4>
+
+<p>场景：Dao 层获取数据库连接；</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBConnection</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"使用 Mysql 数据库连接"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProductDao</span> <span class="kd">extends</span> <span class="nc">DBConnection</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addProduct</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">connection</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"使用 "</span> <span class="o">+</span> <span class="n">connection</span> <span class="o">+</span> <span class="s">" 添加产品"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ProductDao</span> <span class="n">productDao</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ProductDao</span><span class="o">();</span>
+        <span class="n">productDao</span><span class="o">.</span><span class="na">addProduct</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><img src="/assets/markdown-img-paste-20180826210352150.png" alt="" /></p>
+
+<p>需求来了：增加了 Postgresql 数据库，要切换数据源怎么办？</p>
+
+<p>在上面的示例中，可能的修改如下：</p>
+
+<ul>
+  <li>增加 PostgresqlConnection 修改 ProductDao的继承类</li>
+  <li>在 DBConnection 中新增获取 PostgresqlConnection 的方法</li>
+</ul>
+
+<p>上面这样做，都破坏了开闭原则。下面使用合成/复用原则来改造</p>
+
+<h4 id="合成复用-改造场景">合成/复用 改造场景</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">DBConnection</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="nf">getConnection</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MysqlDBConnection</span> <span class="kd">implements</span> <span class="nc">DBConnection</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"使用 Mysql 数据库连接"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostgreesqlDBConnection</span> <span class="kd">implements</span> <span class="nc">DBConnection</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"使用 Postgreesql 数据库连接"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProductDao</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">DBConnection</span> <span class="n">dbConnection</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addProduct</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">dbConnection</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"使用 "</span> <span class="o">+</span> <span class="n">connection</span> <span class="o">+</span> <span class="s">" 添加产品"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDbConnection</span><span class="o">(</span><span class="nc">DBConnection</span> <span class="n">dbConnection</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">dbConnection</span> <span class="o">=</span> <span class="n">dbConnection</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ProductDao</span> <span class="n">productDao</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ProductDao</span><span class="o">();</span>
+        <span class="n">productDao</span><span class="o">.</span><span class="na">setDbConnection</span><span class="o">(</span><span class="k">new</span> <span class="nc">MysqlDBConnection</span><span class="o">());</span>
+<span class="c1">//        productDao.setDbConnection(new PostgreesqlDBConnection());</span>
+        <span class="n">productDao</span><span class="o">.</span><span class="na">addProduct</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/markdown-img-paste-2018082621124512.png" alt="" /></p>
+
+<p>组合，一对一，强依赖。符合开闭原则，也符合里氏替换原则。随意替换数据源</p>
+
+<h2 id="迪米特原则">迪米特原则</h2>
+
+<p><strong>定义</strong>：一个对象应该对其他对象保持最少的了解。又叫最少知道原则</p>
+
+<p><strong>核心</strong>：尽量降低类与类之间的耦合</p>
+
+<p><strong>优点</strong>：降低类之间的耦合</p>
+
+<p><strong>强调</strong>：纸盒朋友交流，不和陌生人说话</p>
+
+<p>什么是朋友？出现在成员变量、方法的输入、输出参数中的类称为朋友类，而出现在方法体内部的类不属于朋友类</p>
+
+<h4 id="coding-1">coding</h4>
+
+<p>场景：老板给小组长下达指令，查询在线课程数量</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Boss</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">commandCheckNumber</span><span class="o">(</span><span class="nc">TeamLeader</span> <span class="n">teamLeader</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 老板获取到所有的课程</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Course</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="c1">// 对小组长下达检查指令</span>
+        <span class="n">teamLeader</span><span class="o">.</span><span class="na">checkNumber</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TeamLeader</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkNumber</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 假设在检查逻辑</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"在线课程数量是："</span> <span class="o">+</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Course</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Boss</span> <span class="n">boss</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Boss</span><span class="o">();</span>
+        <span class="nc">TeamLeader</span> <span class="n">teamLeader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TeamLeader</span><span class="o">();</span>
+        <span class="n">boss</span><span class="o">.</span><span class="na">commandCheckNumber</span><span class="o">(</span><span class="n">teamLeader</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>在线课程数量是：20
+</code></pre></div></div>
+
+<p><img src="/assets/markdown-img-paste-2018082614551049.png" alt="" /></p>
+
+<p>对于这个场景来说，boss 是不需要知道 Course 的，只要给 TeamLeader 下达指令，然后 TeamLeader 报告结果即可。</p>
+
+<p>哪些是 Boss 的朋友？ TeamLeader （入参）</p>
+
+<p>哪些不是 Boss 的朋友？ Course，既不是成员变量、方法的输入、输出参数，而只是方法体内部的类。</p>
+
+<h4 id="迪米特原则改造">迪米特原则改造</h4>
+
+<p><img src="/assets/markdown-img-paste-2018082614593442.png" alt="" /></p>
+
+<p>只是把非朋友类逻辑移动到 TeamLeader 中了。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TeamLeader</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkNumber</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// 老板获取到所有的课程</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Course</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"在线课程数量是："</span> <span class="o">+</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>这里对于 TeamLeader 来说，Course 貌似又不是它的朋友了，但是这个是属于 TeamLeader 的职责</p>
+
+<h2 id="依赖倒置原则">依赖倒置原则</h2>
+
+<p><strong>定义</strong>：高层模块（指应用模块）不应该依赖底层模块，二者都应该依赖其抽象</p>
+
+<ul>
+  <li>抽象不应该依赖细节；细节应该依赖抽象</li>
+  <li>针对接口编程，不要针对实现编程</li>
+</ul>
+
+<p>核心思想：面向接口编程</p>
+
+<p><strong>优点</strong>：</p>
+
+<ul>
+  <li>减少类之间的耦合性</li>
+  <li>提高系统稳定性</li>
+  <li>提高代码可读性和维护性</li>
+  <li>可降低修改程序锁造成的风险</li>
+</ul>
+
+<h4 id="coding-2">coding</h4>
+
+<p>场景：Geely 在慕课上学习课程，学习 Java 课程，学习前端课程。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">cn.mrcode.newstudy.design.pattern.principle.dependencyinversion</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Geely</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">studyJavaCourse</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Geely 在学习 Java 课程"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">studyFECourse</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Geely 在学习 FE 课程"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">cn.mrcode.newstudy.design.pattern.principle.dependencyinversion</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Geely</span> <span class="n">geely</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Geely</span><span class="o">();</span>
+        <span class="n">geely</span><span class="o">.</span><span class="na">studyJavaCourse</span><span class="o">();</span>
+        <span class="n">geely</span><span class="o">.</span><span class="na">studyFECourse</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Geely 在学习 Java 课程
+Geely 在学习 FE 课程
+</code></pre></div></div>
+
+<p>现在的问题是：如果要再增加一门学习课程呢？那么解决的方案只能在 Geely 类中增加另外一门课程的方法，然后Test（应用层）再调用该方法</p>
+
+<p>这破坏了_依赖倒置原则_，Test(应用层)依赖Geely（底层模块）。下面使用依赖倒置原则来进行修改</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface ICourse {
+    void studyCourse();
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class JavaCourse implements ICourse {
+    @Override
+    public void studyCourse() {
+        System.out.println("Geely 在学习 Java 课程");
+    }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class FECourse implements ICourse {
+    @Override
+    public void studyCourse() {
+        System.out.println("Geely 在学习 FE 课程");
+    }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Geely {
+    public void studyImoocCourse(ICourse iCourse) {
+        iCourse.studyCourse();
+    }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static void main(String[] args) {
+    // v1 不使用依赖倒置原则
+//        Geely geely = new Geely();
+//        geely.studyJavaCourse();
+//        geely.studyFECourse();
+//        geely.studyPythonCourse();
+
+    Geely geely = new Geely();
+    geely.studyImoocCourse(new JavaCourse());
+    geely.studyImoocCourse(new FECourse());
+}
+</code></pre></div></div>
+
+<p><img src="/assets/markdown-img-paste-20180826105433811.png" alt="" /></p>
+
+<p>上面这个示例：</p>
+
+<ul>
+  <li>geely 学习什么课程由 Test（应用层决定，高层模块）</li>
+  <li>再学习其他的课程，只需要扩展课程即可。而 geely 不需要变动
+    <ul>
+      <li>在底层模块<strong>扩展</strong></li>
+      <li>是扩展课程，而不是去修改已有的 JavaCourse ，这也符合了_开闭原则_</li>
+    </ul>
+  </li>
+  <li>面向接口编程，而不是面对 Geely</li>
+  <li>Test 与 Geely 是解耦的</li>
+  <li>Gelly 与 具体的课程实现是解耦的</li>
+  <li>Gelly 与 ICourse 是有依赖的</li>
+  <li>所谓高内聚，低耦合，就是尽量减少耦合</li>
+</ul>
+
+<p>这里只是一种写法，</p>
+
+<ul>
+  <li>由方法参数传递进去，</li>
+  <li>还可以从构造函数传递（不过这样一个 geely 实例就只能学习一种课程了）</li>
+  <li>还可以设置一个set方法，每次学习前，把课程set进去</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// v3
+// Geely geely = new Geely(new JavaCourse());
+// geely.studyImoocCourse();
+
+Geely geely = new Geely();
+geely.setCourse(new JavaCourse())
+geely.studyImoocCourse();
+
+geely.setCourse(new FECourse())
+geely.studyImoocCourse();
+</code></pre></div></div>
+
+<p>依赖倒置原则表现了一种事实：</p>
+
+<ul>
+  <li>相对于细节的多变性，抽象的东西要稳定得多</li>
+  <li>以抽象搭建起来的架构，比以细节搭建起来的要稳定得多</li>
+</ul>
+
+<p>那么抽象的目的也就是：制定好规范和契约，如 ICourse 就是一种规范契约</p>
+
+<h2 id="接口隔离原则">接口隔离原则</h2>
+
+<p><strong>定义</strong>：用多个专门的接口，而不使用单一的总接口，客户端不应该依赖它不需要的接口</p>
+
+<ul>
+  <li>一个类（泛指，）对一个类的依赖应该建立在虚小的接口上</li>
+  <li>建立单一接口，不要建立庞大臃肿的接口</li>
+  <li>尽量细化接口，接口中的方法尽量少</li>
+  <li>
+    <p><strong>注意湿度原则，一定要适度</strong></p>
+
+    <p>如果只是尽可能的一个接口一个方法的话，那么接口类将爆炸，复杂性更高</p>
+  </li>
+</ul>
+
+<p><strong>优点</strong>：符合我们常说的高内聚低耦合的设计思想，从而使得类具有很好的：</p>
+
+<ul>
+  <li>可读性</li>
+  <li>可扩展性</li>
+  <li>可维护性</li>
+</ul>
+
+<p>高内聚：减少对外的交互，使接口中最少的方法去完成最多的事情</p>
+
+<p>一定要适度，在实际开发过程中，还要考虑业务模型，包括预判未来可能变更的地方</p>
+
+<h4 id="coding-3">coding</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 动物行为</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IAnimalAction</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">eat</span><span class="o">();</span>
+
+    <span class="kt">void</span> <span class="nf">fly</span><span class="o">();</span> <span class="c1">// 飞</span>
+
+    <span class="kt">void</span> <span class="nf">swim</span><span class="o">();</span> <span class="c1">// 游泳</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">implements</span> <span class="nc">IAnimalAction</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fly</span><span class="o">()</span> <span class="o">{</span>
+      <span class="c1">// 狗不会飞</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">swim</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>对于狗来说，其他两种行为都ok，但是不会飞。假如再增加一种鸟类动物大雁，大雁不会游泳。</p>
+
+<p>那么使用接口隔离原则来实现的一种可能：将接口拆分</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IEatAnimalAction</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">eat</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IFlyAnimalAction</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">fly</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISwimAnimalAction</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">swim</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bird</span> <span class="kd">implements</span> <span class="nc">IFlyAnimalAction</span><span class="o">,</span> <span class="nc">IEatAnimalAction</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fly</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/markdown-img-paste-20180826141002886.png" alt="" /></p>
+
+<p>这样就将行为给隔离开了。也不会有空实现方法了；</p>
+
+<p>那么 单一职责原则和接口隔离原则有什么不同呢?</p>
+
+<ul>
+  <li>单一职责原则：约束的是类，接口，方法的<strong>职责</strong>是单一的
+    <ul>
+      <li>也就是说，在一个接口中，只要职责是单一的，有多个方法也可以</li>
+      <li>如：游泳：有狗刨，自由泳等</li>
+      <li>针对的是程序中的实现和细节</li>
+    </ul>
+  </li>
+  <li>接口隔离原则：主要约束的是接口，
+    <ul>
+      <li>针对抽象，整体，程序框架的构建</li>
+    </ul>
+  </li>
+</ul>
+
+<p>还是适度，看项目规模、业务模型，不要一个简单的业务就搞了n个接口和类，开发起来也麻烦</p>
+
+<h2 id="里氏替换原则">里氏替换原则</h2>
+
+<p>Liskov Substitution Principle LSP</p>
+
+<p>稍微有点难。不过不要慌</p>
+
+<p><strong>定义</strong>：如果对每一个类型为 T1 的对象 o1，都有类型为 T2 的对象 o2，
+使得以 T1 定义的所有程序 P 在所有的对象 o1 都替换成 o2 时，程序 P 的行为没有发生变化，
+那么类型 T2 是类型 T1的子类型。</p>
+
+<p>提取关键词解读：</p>
+
+<ul>
+  <li>T1 类有对象 o1</li>
+  <li>T2 类有对象 o2</li>
+  <li>P 程序</li>
+</ul>
+
+<p>当把程序中依赖 o1 对象全部替换成 o2 时，程序的行为没有发生变化。那么就可以认定为：T2 是 T1的子类型</p>
+
+<p>里氏替换原则是对开闭原则的一个补充：</p>
+
+<ul>
+  <li>开闭原则：面向抽象编程，要抽象</li>
+  <li>里氏替换原则：可以被替换，那么就有抽象；对实现抽象化的具体步骤规范</li>
+</ul>
+
+<p>比如：我们自定义一个类继承了ArrayList，但是重写get(indix)方法时，把索引改成从1开始了，
+那么这样的虽然有抽象，但是行为发生了变化，这样也不被认为 自定义的是 ArrayList的子类型</p>
+
+<blockquote>
+  <p>上面这个比喻：我没有明白，懵逼了</p>
+</blockquote>
+
+<p><strong>定义扩展</strong>：一个软件实体如果适用一个父类的话，那一定适用于其子类，
+所有引用父类的地方必须能透明地适用其子类的对象，子类对象能够替换父类对象，而程序逻辑不变</p>
+
+<p>在 java 中来说，只要只继承了某父类，那么就被认定为是其子类型，
+但是对于里氏替换原则来说，就算继承了，但是导致替换后，行为发生了变化，则被认定为是不合法的</p>
+
+<p><strong>引申意义</strong>：子类可以扩展父类的功能，但不能改变父类原有的功能。</p>
+
+<ul>
+  <li>含义 1：子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法。</li>
+  <li>
+    <p>含义 2：子类中可以增加自己特有的方法。</p>
+
+    <p>对于开闭原则中的例子如下，就有一个含义（含义 2）被破坏了，
+JavaDiscountCourse 在扩展父类功能的时候，改变了 getPrice 的含义</p>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+       <span class="nc">ICourse</span> <span class="n">iCourse</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaDiscountCourse</span><span class="o">(</span><span class="mi">96</span><span class="o">,</span> <span class="s">"设计模式"</span><span class="o">,</span> <span class="mi">389</span><span class="n">d</span><span class="o">);</span>
+       <span class="nc">JavaDiscountCourse</span> <span class="n">javaCourse</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JavaDiscountCourse</span><span class="o">)</span> <span class="n">iCourse</span><span class="o">;</span>
+       <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ID:"</span> <span class="o">+</span> <span class="n">javaCourse</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">+</span>
+               <span class="s">"，课程名称："</span> <span class="o">+</span> <span class="n">javaCourse</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span>
+               <span class="s">"，价格："</span> <span class="o">+</span> <span class="n">javaCourse</span><span class="o">.</span><span class="na">getPrice</span><span class="o">()</span> <span class="o">+</span>
+               <span class="s">", 原价："</span> <span class="o">+</span> <span class="n">javaCourse</span><span class="o">.</span><span class="na">getOriginPrice</span><span class="o">()</span>
+       <span class="o">);</span>
+   <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>通过上面的知识点来回想自己在实际工作中，经常会重写父类的方法，这样写起来的确简单快捷，
+但是在一定程度上导致了整个继承体系的可复用性比较差，特别是使用多态频繁的时候，出错的几率会大大增加。</p>
+  </li>
+  <li>含义 3 ：当子类的方法<strong>重载</strong>父类的方法时，方法的前置条件（既方法的入参）要比父类的入参更宽松。</li>
+  <li>含义 4 ：当子类的方法实现父类的方法时（重写/重载或实现抽象方法）方法的后置条件（及方法的返回值）要比如雷更严格或相等。</li>
+</ul>
+
+<p><strong>优点</strong>：</p>
+
+<ul>
+  <li>
+    <p>约束继承泛滥，开闭原则的一种体现</p>
+
+    <p>如：Persion 中有一个 生娃 的方法，子类可能有白人、黑人、黄种人，这是可以的，符合里氏替换原则。
+但是，来一个男人，机器人，这就是一个继承泛滥的表现</p>
+  </li>
+  <li>
+    <p>加强程序的健壮性，同时变更时也可以做到非常好的兼容性，提高程序的维护性，扩展性。
+降低需求变更时引入的风险。</p>
+  </li>
+</ul>
+
+<h4 id="coding-4">coding</h4>
+
+<h4 id="从类层面演示">从类层面演示</h4>
+<p><strong>场景</strong>：正方形和长方形，我们认为正方形是一种特殊的长方形。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 长方形</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Rectangle</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">length</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">width</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getLength</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">length</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLength</span><span class="o">(</span><span class="kt">long</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">length</span> <span class="o">=</span> <span class="n">length</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getWidth</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">width</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setWidth</span><span class="o">(</span><span class="kt">long</span> <span class="n">width</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 正方形：来验证在某些场景下，正方形是否是长方形</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Square</span> <span class="kd">extends</span> <span class="nc">Rectangle</span> <span class="o">{</span>
+    <span class="c1">// 边长：正方形的长宽是一样的</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">sideLength</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getSideLength</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">sideLength</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSideLength</span><span class="o">(</span><span class="kt">long</span> <span class="n">sideLength</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">sideLength</span> <span class="o">=</span> <span class="n">sideLength</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getLength</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">getSideLength</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLength</span><span class="o">(</span><span class="kt">long</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">setSideLength</span><span class="o">(</span><span class="n">length</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getWidth</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">getSideLength</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setWidth</span><span class="o">(</span><span class="kt">long</span> <span class="n">width</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">setSideLength</span><span class="o">(</span><span class="n">width</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">(</span><span class="nc">Rectangle</span> <span class="n">rectangle</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">rectangle</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getLength</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">rectangle</span><span class="o">.</span><span class="na">setWidth</span><span class="o">(</span><span class="n">rectangle</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"width:"</span> <span class="o">+</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">+</span>
+                    <span class="s">"  length:"</span> <span class="o">+</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getLength</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"resize 方法结束：width:"</span> <span class="o">+</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">+</span>
+                <span class="s">"  length:"</span> <span class="o">+</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getLength</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Rectangle</span> <span class="n">rectangle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rectangle</span><span class="o">();</span>
+        <span class="n">rectangle</span><span class="o">.</span><span class="na">setLength</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
+        <span class="n">rectangle</span><span class="o">.</span><span class="na">setWidth</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+        <span class="n">resize</span><span class="o">(</span><span class="n">rectangle</span><span class="o">);</span>
+
+        <span class="nc">Square</span> <span class="n">square</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Square</span><span class="o">();</span>
+        <span class="n">square</span><span class="o">.</span><span class="na">setSideLength</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+        <span class="n">resize</span><span class="o">(</span><span class="n">square</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>输出</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>width:20  length:20
+width:21  length:20
+resize 方法结束：width:21  length:20
+
+width:239722  length:239722
+width:239723  length:239723
+</code></pre></div></div>
+
+<p>会发现，在验证 resize 场景中，正方形是否是长方形这一子类的时候，替换之后，再次运行 resize 方法的时候，行为改变了，不能结束了；</p>
+
+<p>那么这个时候就要考虑正方形继承长方形是否是正确的了，
+假设之前的鸟类，我们认为飞的行为就是鸟类的特性，但是鸵鸟就是不能飞，强行让鸵鸟继承鸟，则有可能会造成与这里一致的情况。行为被改变了。</p>
+
+<p>那么这里来继续重构，解耦正方形和长方形；他们都是四边形；</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Quadrangle</span> <span class="o">{</span>
+    <span class="kt">long</span> <span class="nf">getLength</span><span class="o">();</span>
+
+    <span class="kt">long</span> <span class="nf">getWidth</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">implements</span> <span class="nc">Quadrangle</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">length</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">width</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLength</span><span class="o">(</span><span class="kt">long</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">length</span> <span class="o">=</span> <span class="n">length</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setWidth</span><span class="o">(</span><span class="kt">long</span> <span class="n">width</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getLength</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getWidth</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Square</span> <span class="kd">implements</span> <span class="nc">Quadrangle</span> <span class="o">{</span>
+    <span class="c1">// 边长：正方形的长宽是一样的</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">sideLength</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getSideLength</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">sideLength</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSideLength</span><span class="o">(</span><span class="kt">long</span> <span class="n">sideLength</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">sideLength</span> <span class="o">=</span> <span class="n">sideLength</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getLength</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">getSideLength</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getWidth</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">getSideLength</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>那么就会发现，没有办法设置宽度了。对于 resize 场景来说，正方形是不适合该场景的；</p>
+
+<p>所以这里还是只能用于长方形。说明了，长方形和正方形在该场景中不适合里氏替换原则的</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">(</span><span class="nc">Quadrangle</span> <span class="n">rectangle</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">rectangle</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getLength</span><span class="o">())</span> <span class="o">{</span>
+        <span class="c1">// 没有办法 setWidth</span>
+        <span class="n">rectangle</span><span class="o">.</span><span class="na">setWidth</span><span class="o">(</span><span class="n">rectangle</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"width:"</span> <span class="o">+</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">+</span>
+                <span class="s">"  length:"</span> <span class="o">+</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getLength</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"resize 方法结束：width:"</span> <span class="o">+</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">+</span>
+            <span class="s">"  length:"</span> <span class="o">+</span> <span class="n">rectangle</span><span class="o">.</span><span class="na">getLength</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>通过这个例子，能深刻的理解里氏替换原则在我们软件设计中存在的巨大作用。</p>
+
+<p>同时也约束我们，子类的行为与父类应该保持一致，如果子类达不到这一点，那么子类就会违反里氏替换原则。</p>
+
+<p>在实际过程中，是多人协同开发的，甚至通过层层包装后，再使用，
+如果这个时候，对于 resize 场景不采用里氏替换原则来约束，那么就将产生与预期不一致的行为，导致错误产生</p>
+
+<h4 id="方法入参出参-来说明">方法入参出参 来说明</h4>
+<ul>
+  <li>含义 3 ：当子类的方法<strong>重载</strong>父类的方法时，方法的前置条件（既方法的入参）要比父类的入参更宽松。</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Base</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="nc">HashMap</span> <span class="n">hashMap</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"父类被执行"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Child</span> <span class="kd">extends</span> <span class="nc">Base</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="nc">HashMap</span> <span class="n">hashMap</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"子类 HashMap 被执行"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 比父类入参更宽松，不是重写，是重载</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="nc">Map</span> <span class="n">map</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"子类 Map 被执行"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Test {
+    public static void main(String[] args) {
+        Child child = new Child();
+        HashMap hashMap = new HashMap&lt;&gt;();
+        child.method(hashMap);
+    }
+}
+
+输出
+
+子类 HashMap 被执行
+</code></pre></div></div>
+
+<p>当注释掉重写方法时，输出为 <code class="language-plaintext highlighter-rouge">父类被执行</code>;</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Child</span> <span class="kd">extends</span> <span class="nc">Base</span> <span class="o">{</span>
+    <span class="c1">// @Override</span>
+    <span class="c1">// public void method(HashMap hashMap) {</span>
+    <span class="c1">//     System.out.println("子类 HashMap 被执行");</span>
+    <span class="c1">// }</span>
+
+    <span class="c1">// 比父类入参更宽松，不是重写，是重载</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="nc">Map</span> <span class="n">map</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"子类 Map 被执行"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>这个结果是正确的，那么反过来，将父类替换成</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Base</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="nc">Map</span> <span class="n">hashMap</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"父类被执行"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Child</span> <span class="kd">extends</span> <span class="nc">Base</span> <span class="o">{</span>
+    <span class="c1">// 重载：子类的前置条件比父类严格</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="nc">HashMap</span> <span class="n">hashMap</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"子类 HashMap 被执行"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Child</span> <span class="n">child</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Child</span><span class="o">();</span>
+        <span class="nc">HashMap</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">child</span><span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>将会输出： 子类 HashMap 被执行</p>
+
+<p>这就破坏了里氏替换原则，因为这样执行，不是父类的被执行了，容易引起业务逻辑的混乱。bug容易产生。</p>
+
+<p>在写这个简单的例子的时候，就很容易被搞懵逼；</p>
+
+<h4 id="后置条件也就是返回参数">后置条件，也就是返回参数</h4>
+<ul>
+  <li>含义 4 ：当子类的方法实现父类的方法时（重写/重载或实现抽象方法）方法的后置条件（及方法的返回值）要比如雷更严格或相等。</li>
+</ul>
+
+<p>在 java 中重写适合返回参数无关的，像下面这个例子，在 Idea 中就提示错误了，
+所以这样的情况一般比较少犯错误，如果不写 override，那么就容易产生混乱。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 父类是 HashMap</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nc">Map</span> <span class="nf">method</span><span class="o">()</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>实际上看来，这里的例子是在讲，多态，重写，重载，相似的新方法，容易产生逻辑混乱调用，不容易发现问题。 如果遵守里氏替换原则的写法，能减少这样的情况。维护性</p>
+
+<p>还有就是里氏替换原则的约束继承泛滥的问题。</p>
+
+<p>这一个原则理解起来感觉有点难，懵逼</p>
+
+<h2 id="开闭原则">开闭原则</h2>
+
+<p><strong>定义</strong>：一个软件实体如类，模块和函数应该对扩展开放，对修改关闭</p>
+
+<p>开闭，是对扩展和修改两个行为的描述</p>
+
+<p><strong>强调的是</strong>：用抽象构建框架，用实现扩展细节</p>
+
+<p>优点：提高软件系统的可复用性及可维护性</p>
+
+<p>在生活中有一个例子体现：每天工作 8 小时，8 小时是关闭的，什么时候来？什么时候走？这个是开放的</p>
+
+<p><strong>开闭原则的核心</strong>：面向抽象编程，抽象相对来说是稳定的，对修改关闭；</p>
+
+<p>如：一个校验逻辑，先校验什么，后校验什么。扩展一个校验，也就是功能增强，而不要去修改已有的校验功能，这是对修改关闭</p>
+
+<h4 id="开闭原则-coding">开闭原则 coding</h4>
+
+<p>一个场景：慕课网的课程表述；</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 课程
+ * @author : zhuqiang
+ * @version : V1.0
+ * @date : 2018/8/23 23:38
+ */</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ICourse</span> <span class="o">{</span>
+    <span class="nc">Integer</span> <span class="nf">getId</span><span class="o">();</span>
+
+    <span class="nc">String</span> <span class="nf">getName</span><span class="o">();</span>
+
+    <span class="nc">Double</span> <span class="nf">getPrice</span><span class="o">();</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">cn.mrcode.newstudy.design.pattern.principle.openclose</span><span class="o">;</span>
+
+<span class="cm">/**
+ * java 类课程;还有js，算法等课程，需要分开
+ * @author : zhuqiang
+ * @version : V1.0
+ * @date : 2018/8/23 23:40
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaCourse</span> <span class="kd">implements</span> <span class="nc">ICourse</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Double</span> <span class="n">price</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">JavaCourse</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">Double</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">getPrice</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">price</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<pre><code class="language-java{3}">public class Test {
+    public static void main(String[] args) {
+        JavaCourse javaCourse = new JavaCourse(96, "设计模式", 389d);
+        System.out.println("ID:" + javaCourse.getId() +
+                "，课程名称：" + javaCourse.getName() +
+                "，价格：" + javaCourse.getPrice());
+    }
+}
+</code></pre>
+
+<p><img src="/assets/markdown-img-paste-20180824000236410.png" alt="" /></p>
+
+<p>注意看现在的类图结构：JavaCourse 继承了 ICourse （实心箭头）</p>
+
+<p>输出如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID:96，课程名称：设计模式，价格：389.0
+</code></pre></div></div>
+
+<p><strong>需求2</strong>：双11到了，搞活动，打8折</p>
+
+<p>那么方案有以下几种，都能满足需求，来说说不足的地方</p>
+
+<ol>
+  <li>直接在输出的地方价格乘以 0.8
+    <ul>
+      <li>如果只是某些课程打折呢？</li>
+    </ul>
+  </li>
+  <li>在 JavaCourse 类中 getPrice 方法中乘以 0.8
+    <ul>
+      <li>如果要获取原价呢?</li>
+      <li>如果还有要求说是价格大于300的课程才打折呢？</li>
+    </ul>
+  </li>
+  <li>在 ICourse 接口中增加打折方法：discountCourse
+    <ul>
+      <li>如果有很多课程，那么影响范围巨大，除非一开始就已经定义了这种接口</li>
+    </ul>
+  </li>
+</ol>
+
+<p>一看业务变化，上面的方案对于维护来说都是个不好的办法，那么应该怎么办呢？</p>
+
+<p><strong>开闭原则</strong>：模块和函数应该对扩展开放，对修改关闭</p>
+
+<p>那么增加一个打折的子类即可；</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">cn.mrcode.newstudy.design.pattern.principle.openclose</span><span class="o">;</span>
+
+<span class="cm">/**
+ * java课程打折
+ * @author : zhuqiang
+ * @version : V1.0
+ * @date : 2018/8/24 0:13
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaDiscountCourse</span> <span class="kd">extends</span> <span class="nc">JavaCourse</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">JavaDiscountCourse</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">Double</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">price</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">getPrice</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// 这里可以针对业务进行范围的判定等操作</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getPrice</span><span class="o">()</span> <span class="o">*</span> <span class="mf">0.8</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** 获取原价 */</span>
+    <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">getOriginPrice</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getPrice</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">ICourse</span> <span class="n">iCourse</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaDiscountCourse</span><span class="o">(</span><span class="mi">96</span><span class="o">,</span> <span class="s">"设计模式"</span><span class="o">,</span> <span class="mi">389</span><span class="n">d</span><span class="o">);</span>
+    <span class="nc">JavaDiscountCourse</span> <span class="n">javaCourse</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JavaDiscountCourse</span><span class="o">)</span> <span class="n">iCourse</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ID:"</span> <span class="o">+</span> <span class="n">javaCourse</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">+</span>
+            <span class="s">"，课程名称："</span> <span class="o">+</span> <span class="n">javaCourse</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span>
+            <span class="s">"，价格："</span> <span class="o">+</span> <span class="n">javaCourse</span><span class="o">.</span><span class="na">getPrice</span><span class="o">()</span> <span class="o">+</span>
+            <span class="s">", 原价："</span> <span class="o">+</span> <span class="n">javaCourse</span><span class="o">.</span><span class="na">getOriginPrice</span><span class="o">()</span>
+    <span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>输出如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID:96，课程名称：设计模式，价格：311.20000000000005, 原价：389.0
+</code></pre></div></div>
+
+<p><img src="/assets/markdown-img-paste-20180824001852665.png" alt="" /></p>
+
+<p>看现在的类图：这里没有严格按照我们之前讲解的图形来演示，而是有颜色和标识，反正差别不大，更容易看明白</p>
+
+<p>主要是这里的类图结构和增强之前的类图结构对比；阐述了开闭原则，而对于上面所说的那些维护问题相对来说也更方便维护，结构上也更容易理解（杠精请绕道，一般的web开发，基本上不会这样做）</p>
+
+<h2 id="单一职责原则">单一职责原则</h2>
+
+<p><strong>定义</strong>：不要存在多于一个导致类变更的原因</p>
+
+<p>理解：比如：一个类负责了 2 个功能，在修改功能 1 时，导致功能 2 发生了故障；两个功能在需求变更的时候都有可能导致类变更，那么该类存在两个导致类变更的原因</p>
+
+<p><strong>体现</strong>： 一个类、接口、方法只负责一项职责</p>
+
+<p><strong>优点</strong>：</p>
+
+<ul>
+  <li>降低类的复杂度</li>
+  <li>提高类的可读性</li>
+  <li>提高系统的可维护性</li>
+  <li>降低变更引起的风险
+    <ul>
+      <li>变更是必然的，单一职责原则遵循的好，可以降低变更引起的风险</li>
+      <li>单一职责也适用于模块化设计</li>
+    </ul>
+  </li>
+</ul>
+
+<p>开始coding</p>
+
+<h4 id="基本场景">基本场景</h4>
+<p>场景：鸟的动作</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bird</span> <span class="o">{</span>
+    <span class="c1">// 主要移动方式</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">mainMoveMode</span><span class="o">(</span><span class="nc">String</span> <span class="n">birdName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">birdName</span> <span class="o">+</span> <span class="s">"用翅膀飞"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Bird</span> <span class="n">bird</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bird</span><span class="o">();</span>
+        <span class="n">bird</span><span class="o">.</span><span class="na">mainMoveMode</span><span class="o">(</span><span class="s">"大雁"</span><span class="o">);</span>
+        <span class="n">bird</span><span class="o">.</span><span class="na">mainMoveMode</span><span class="o">(</span><span class="s">"鸵鸟"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>大雁用翅膀飞
+鸵鸟用翅膀飞
+</code></pre></div></div>
+
+<p>这里的结果就有问题了：鸵鸟主要移动方式是用脚走路。那么进行修改</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bird</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">mainMoveMode</span><span class="o">(</span><span class="nc">String</span> <span class="n">birdName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="s">"鸵鸟"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">birdName</span><span class="o">))</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">birdName</span> <span class="o">+</span> <span class="s">"用脚走"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">birdName</span> <span class="o">+</span> <span class="s">"用翅膀飞"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>这个示例说实在的，我自己平时在开发的时候就经常这样做，这样做的原因有多种，比如</p>
+
+<ul>
+  <li>时间关系</li>
+  <li>感觉这个业务不怎么复杂，这样改动是最方便最快捷的</li>
+</ul>
+
+<p>如果还有更多的不同移动方式的鸟类呢？这里的逻辑则会更多的判定。如果在一段很复杂的业务逻辑中，就很容易出错。这里就破坏了单一职责原则-降低变更引起的风险</p>
+
+<h4 id="类单一职责演示">类单一职责演示</h4>
+<p>把上面负责多职责的拆分成单一职责</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 会飞的鸟</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FlyBird</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">mainMoveMode</span><span class="o">(</span><span class="nc">String</span> <span class="n">birdName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">birdName</span> <span class="o">+</span> <span class="s">"用翅膀飞"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 用脚走的鸟</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WalkBird</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">mainMoveMode</span><span class="o">(</span><span class="nc">String</span> <span class="n">birdName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">birdName</span> <span class="o">+</span> <span class="s">"用脚走"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>由应用层来判定，什么鸟适合什么行走方式</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FlyBird</span> <span class="n">flyBird</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FlyBird</span><span class="o">();</span>
+<span class="n">flyBird</span><span class="o">.</span><span class="na">mainMoveMode</span><span class="o">(</span><span class="s">"大雁"</span><span class="o">);</span>
+
+<span class="nc">WalkBird</span> <span class="n">walkBird</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WalkBird</span><span class="o">();</span>
+<span class="n">walkBird</span><span class="o">.</span><span class="na">mainMoveMode</span><span class="o">(</span><span class="s">"鸵鸟"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/markdown-img-paste-20180826131725881.png" alt="" /></p>
+
+<h4 id="接口级别">接口级别</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ICourse</span> <span class="o">{</span>
+    <span class="c1">// ~-----------  课程信息</span>
+    <span class="nc">String</span> <span class="nf">getCourseName</span><span class="o">();</span>
+    <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getCourseVideo</span><span class="o">();</span>
+
+    <span class="c1">// ~-----------  课程管理</span>
+    <span class="cm">/** 学习课程 */</span>
+    <span class="kt">void</span> <span class="nf">studyCourrse</span><span class="o">();</span>
+    <span class="cm">/** 退款这门课程 */</span>
+    <span class="kt">void</span> <span class="nf">refundCourse</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>对于这个接口来说，有两个大的职责：获取课程信息和课程管理。</p>
+
+<p>如果当课程被退掉的时候，这门课程的信息就获取不到了，也就是说 refundCourse 会影响获取课程信息相关的功能。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ICourseContent</span> <span class="o">{</span>
+    <span class="c1">// ~-----------  课程信息</span>
+    <span class="nc">String</span> <span class="nf">getCourseName</span><span class="o">();</span>
+
+    <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getCourseVideo</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ICourseManager</span> <span class="o">{</span>
+    <span class="c1">// ~-----------  课程管理</span>
+    <span class="cm">/** 学习课程 */</span>
+    <span class="kt">void</span> <span class="nf">studyCourrse</span><span class="o">();</span>
+    <span class="cm">/** 退款这门课程 */</span>
+    <span class="kt">void</span> <span class="nf">refundCourse</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CourseImpl</span> <span class="kd">implements</span> <span class="nc">ICourseContent</span><span class="o">,</span> <span class="nc">ICourseManager</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getCourseName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getCourseVideo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">studyCourrse</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">refundCourse</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/markdown-img-paste-20180826133031296.png" alt="" /></p>
+
+<p>由具体的实现选择来组合实现哪些功能（也可以只实现其中一个），</p>
+
+<ul>
+  <li>在接口级别上两个接口的职责是清晰的，隔离的。</li>
+  <li>复杂度也降低了，可读性也变高了</li>
+  <li>降低变更引起的风险，可维护性变高了</li>
+  <li>一个接口的修改不影响另一个接口的功能</li>
+</ul>
+
+<h4 id="方法级别">方法级别</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateUserInfo</span><span class="o">(</span><span class="nc">String</span> <span class="n">userName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">address</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">bool</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">bool</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// 逻辑1</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// 逻辑2</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>这种的逻辑，很明确的是两个功能逻辑，就可以完全拆分成两个方法来处理这不同的功能，而不是用一个标志来处理</p>
+
+:ET
