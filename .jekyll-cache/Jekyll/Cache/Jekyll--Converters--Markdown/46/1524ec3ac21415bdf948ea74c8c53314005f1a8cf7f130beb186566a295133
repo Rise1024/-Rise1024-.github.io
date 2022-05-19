@@ -1,4 +1,4 @@
-I"14<h2 id="初识简单工厂">初识简单工厂</h2>
+I"4<h2 id="初识简单工厂">初识简单工厂</h2>
 
 <h3 id="定义">定义</h3>
 
@@ -6,7 +6,7 @@
 
 <h3 id="结构和说明">结构和说明</h3>
 
-<p>![]/assets/img/posts/20220518/design_pattern/simple_factory/img/posts/20220518/design_pattern/simple_factory/1.jpg)</p>
+<p><img src="/assets/img/posts/20220518/design_pattern/simple_factory/1.jpg" alt="" /></p>
 
 <p><strong>APi：</strong> 定义客户所需要的功能接口</p>
 

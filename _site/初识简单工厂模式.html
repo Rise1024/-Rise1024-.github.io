@@ -22,7 +22,7 @@
   "headline": "设计模式一:初识简单工厂模式",
   "abstract": "简单工厂模式",
     "keywords": "设计模式",
-    "wordcount": "251",
+    "wordcount": "250",
     "image": ["http://localhost:4000/assets/imgposts/stock/abstract_7.jpeg"],
   "datePublished": "2022-05-19 03:32:20 +0800",
   "dateModified": "2022-05-19 03:32:20 +0800",
@@ -62,7 +62,7 @@
 <meta name="twitter:description" content="简单工厂模式">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="251"/>
+<meta data-rh="true" name="twitter:data1" content="250"/>
 <meta name="twitter:image:src" content="http://localhost:4000/assets/img/posts/stock/abstract_7.jpeg">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -171,7 +171,7 @@
   </span>
 
         <div class="post-excerpt">
-            <h2 id="初识简单工厂">初识简单工厂</h2><h3 id="定义">定义</h3><p>提供一个创建对象实例的功能，而无需关心其具体实现。被构建实例的类型可以是接口、抽象类，也可以是具体的类</p><h3 id="结构和说明">结构和说明</h3><p>![]/assets/img/posts/20220518/design_pattern/simple_factory/img/posts/20220518/design_pattern/simple_factory/1.jpg)</p><p><strong>APi：</strong> 定义客户所需要的功能接口</p><p><strong>Impl：</strong> 具体实现Api的实现类，可能会有多个</p><p><strong>Factory：</strong> 工厂，选择合适的实现类来创建Api的接口对象</p><p><strong>Client：</strong> 客户端，通过Factory去获取Api接口对象，然后面向Api接口编程</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Api</span> <span class="o">{</span> <span class="kt">void</span> <span class="nf">operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">);</span><span class="o">}</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImplA</span> <span class="kd">implements</span> <span class="nc">Api</span> <span class="o">{</span> <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"实现a:"</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span> <span class="o">}</span><span class="o">}</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImplB</span> <span class="kd">implements</span> <span class="nc">Api</span> <span class="o">{</span> <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span...<a class="read-more" href="./%E5%88%9D%E8%AF%86%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html"> read more</a>
+            <h2 id="初识简单工厂">初识简单工厂</h2><h3 id="定义">定义</h3><p>提供一个创建对象实例的功能，而无需关心其具体实现。被构建实例的类型可以是接口、抽象类，也可以是具体的类</p><h3 id="结构和说明">结构和说明</h3><p><img src="/assets/img/posts/20220518/design_pattern/simple_factory/1.jpg" alt="" /></p><p><strong>APi：</strong> 定义客户所需要的功能接口</p><p><strong>Impl：</strong> 具体实现Api的实现类，可能会有多个</p><p><strong>Factory：</strong> 工厂，选择合适的实现类来创建Api的接口对象</p><p><strong>Client：</strong> 客户端，通过Factory去获取Api接口对象，然后面向Api接口编程</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Api</span> <span class="o">{</span> <span class="kt">void</span> <span class="nf">operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">);</span><span class="o">}</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImplA</span> <span class="kd">implements</span> <span class="nc">Api</span> <span class="o">{</span> <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"实现a:"</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span> <span class="o">}</span><span class="o">}</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImplB</span> <span class="kd">implements</span> <span class="nc">Api</span> <span class="o">{</span> <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operation</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>...<a class="read-more" href="./%E5%88%9D%E8%AF%86%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html"> read more</a>
         </div>
   </div>
 </section>
@@ -401,7 +401,7 @@
 
 <h3 id="结构和说明">结构和说明</h3>
 
-<p>![]/assets/img/posts/20220518/design_pattern/simple_factory/img/posts/20220518/design_pattern/simple_factory/1.jpg)</p>
+<p><img src="/assets/img/posts/20220518/design_pattern/simple_factory/1.jpg" alt="" /></p>
 
 <p><strong>APi：</strong> 定义客户所需要的功能接口</p>
 
@@ -669,6 +669,37 @@
           
           
 
+          <a href="./%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E.html" class="recent-item-img" style="background: url('./assets/img/posts/stock/abstract_2.jpeg') center no-repeat; background-size: cover;">
+            <div class="recent-item-title">
+              <span>安全漏洞-CSRF漏洞</span>
+              
+
+  <span class = "recent-item-meta">
+  
+  
+  
+  
+    
+    
+    <p class="page_meta-readtime">
+      
+        1 minute read
+      
+    </p>
+  
+  
+  </span>
+
+            </div>
+          </a>
+        </div>
+      
+    
+      
+        <div class="recent-item">
+          
+          
+
           <a href="./%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html" class="recent-item-img" style="background: url('./assets/img/posts/stock/abstract_1.jpeg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
               <span>7大设计原则</span>
@@ -746,37 +777,6 @@
     <p class="page_meta-readtime">
       
         1 minute read
-      
-    </p>
-  
-  
-  </span>
-
-            </div>
-          </a>
-        </div>
-      
-    
-      
-        <div class="recent-item">
-          
-          
-
-          <a href="./%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E6%9C%BA%E5%88%B6.html" class="recent-item-img" style="background: url('./assets/img/posts/20220516/fengmian.jpeg') center no-repeat; background-size: cover;">
-            <div class="recent-item-title">
-              <span>单点登录机制</span>
-              
-
-  <span class = "recent-item-meta">
-  
-  
-  
-  
-    
-    
-    <p class="page_meta-readtime">
-      
-        less than 1 minute read
       
     </p>
   
