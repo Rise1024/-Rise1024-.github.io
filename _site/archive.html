@@ -288,6 +288,84 @@
 		<div class="post">
 			
 
+			<a class="post-list-title" href="./%E4%B8%80%E4%B8%AA%E7%A0%81%E5%B7%A5.html">一个码工</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2022-12-17T19:06:21+08:00">December 17, 2022</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        less than 1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<h3 id="一个码工">一个码工</h3><h4 id="test1">test1</h4><p>hello 大家好！！！！！<a href="/assets/img/posts/20220516/dandian3.png">这是图片</a></p><a class="read-more" href="./%E4%B8%80%E4%B8%AA%E7%A0%81%E5%B7%A5.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
+			<a class="post-list-title" href="./%E9%87%8D%E6%B8%A9%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html">重温正则表达式</a>
+			
+
+  <span class = "post-card-meta">
+  
+  
+    <span class="meta-pre"></span>
+  
+  
+    
+      
+      <span class="page_meta-date">
+        <time datetime="2022-05-21T03:32:20+08:00">May 21, 2022</time>
+      </span>
+    
+    
+      <span class="meta-sep"></span>
+    
+  
+  
+    
+    
+    <span class="page_meta-readtime">
+      
+        less than 1 minute read
+      
+    </span>
+  
+  
+  </span>
+
+			<div class="post-excerpt">
+				<h2 id="正则表达式">正则表达式</h2><h3 id="什么是正则表达式">什么是正则表达式</h3><p>  正则表达式是一种用来匹配字符串的强有力的武器，它的设计思想是用一种描述性的语言定义一个规则，凡是符合规则的字符串，我们就认为它“匹配”了，否则，该字符串就是不合法的</p><h3 id="匹配规则">匹配规则</h3><ul> <li>* 0次或者多次出现</li> <li>+ 1次或者多次出现</li> <li>？ 0次或者1次出现</li> <li>{n} n次出现</li> <li>{n,} 至少n次出现</li> <li>{n,m} n到m（不包含）次出现</li> <li>[1-5] 1到5</li> <li>[0-9] 表示 0到9 之间的数 包括 0 和 9</li> <li>[3-6] 表示 3到6 之间的数 包括 3 和 6</li> <li>[a-z] 表示 a-z 之间所有的字母 包含 a 和 z</li> <li>[A-Z] 表示 A-Z 之间所有的字母 包含 A 和 Z</li> <li> <p>[0-9A-Z] 表示 0 到 9 和 大写A 到 大写 Z 中间所有字符</p> </li> <li>x 任意单个字符</li> <li>. 除了换行符的任意单个字符</li> <li> <table> <tbody> <tr> <td>(ab</td> <td>cd) ab或者cd</td> </tr> </tbody> </table> </li> <li> <p>[abc] a或者b或者c</p> </li> <li>\d 匹配一个数字字符。等价于[0-9]。</li> <li>\D 匹配一个非数字字符。等价于[^0-9]。</li> <li>\s 匹配任何空白字符，包括空格、制表符、换页符等等。等价于[ \f\n\r\t\v]。</li> <li>\w 匹配包括下划线的任何单词字符。等价于“[A-Za-z0-9_]”。</li> <li> <p>\W 匹配任何非单词字符。等价于“[^A-Za-z0-9_]”。</p> </li> <li>(?i) 表示所在位置右侧的表达式开启忽略大小写模式</li> <li>(?s) 表示所在位置右侧的表达式开启单行模式</li> <li>(?m)...<a class="read-more" href="./%E9%87%8D%E6%B8%A9%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html"> read more</a>
+			</div>
+		</div>
+	
+		<div class="post">
+			
+
 			<a class="post-list-title" href="./%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E.html">安全漏洞-CSRF漏洞</a>
 			
 
@@ -321,84 +399,6 @@
 
 			<div class="post-excerpt">
 				<h2 id="csrf漏洞攻击与防御">CSRF漏洞攻击与防御</h2><h3 id="什么是csrf漏洞">什么是CSRF漏洞</h3><p>   攻击者盗用了你的身份，以你的名义发送恶意请求，对服务器来说这个请求是完全合法的，但是却完成了攻击者所期望的一个操作，比如以你的名义发送邮件、发消息，盗取你的账号，添加系统管理员，甚至于购买商品、虚拟货币转账等。<img src="../assets/img/posts/20220519/img1.png" alt="img.png" /></p><h3 id="攻击实例">攻击实例</h3><p>   受害者 Bob 在银行有一笔存款，通过对银行的网站发送请求 http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=bob2 可以使 Bob 把 1000000 的存款转到 bob2 的账号下。通常情况下，该请求发送到网站后，服务器会先验证该请求是否来自一个合法的 session，并且该 session 的用户 Bob 已经成功登陆。</p><p>  黑客 Mallory 自己在该银行也有账户，他知道上文中的 URL 可以把钱进行转帐操作。Mallory 可以自己发送一个请求给银行：http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory。但是这个请求来自 Mallory 而非 Bob，他不能通过安全认证，因此该请求不会起作用。</p><p>  这时，Mallory 想到使用 CSRF 的攻击方式，他先自己做一个网站，在网站中放入如下代码： src=”http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory ”，并且通过广告等诱使 Bob 来访问他的网站。当 Bob 访问该网站时，上述 url 就会从 Bob 的浏览器发向银行，而这个请求会附带 Bob 浏览器中的 cookie 一起发向银行服务器。大多数情况下，该请求会失败，因为他要求 Bob 的认证信息。但是，如果 Bob 当时恰巧刚访问他的银行后不久，他的浏览器与银行网站之间的 session 尚未过期，浏览器的 cookie 之中含有 Bob 的认证信息。这时，悲剧发生了，这个 url 请求就会得到响应，钱将从 Bob 的账号转移到 Mallory 的账号，而 Bob 当时毫不知情。等以后 Bob 发现账户钱少了，即使他去银行查询日志，他也只能发现确实有一个来自于他本人的合法请求转移了资金，没有任何被攻击的痕迹。而 Mallory 则可以拿到钱后逍遥法外。</p><h3 id="防御csrf漏洞">防御CSRF漏洞</h3><p>  目前防御 CSRF 攻击主要有三种策略：</p><p><strong>验证 HTTP Referer 字段&lt;/br&gt;</strong><strong>在请求地址中添加 token 并验证&lt;/br&gt;</strong><strong>在 HTTP 头中自定义属性并验证&lt;/br&gt;</strong></p><h4 id="1验证-http-referer-字段">(1)验证 HTTP Referer 字段</h4><p>  根据 HTTP 协议，在 HTTP 头中有一个字段叫 Referer，它记录了该 HTTP 请求的来源地址。在通常情况下，访问一个安全受限页面的请求来自于同一个网站，比如需要访问 http://bank.example/withdraw?account=bob&amp;amount=1000000&amp;for=Mallory，用户必须先登陆 bank.example，然后通过点击页面上的按钮来触发转账事件。这时，该转帐请求的 Referer 值就会是转账按钮所在的页面的 URL，通常是以 bank.example 域名开头的地址。而如果黑客要对银行网站实施 CSRF...<a class="read-more" href="./%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html">7大设计原则</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2022-05-19T03:32:20+08:00">May 19, 2022</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        9 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<h2 id="合成复用原则">合成复用原则</h2><p>合成（组合）/ 聚合复用原则</p><p><strong>定义</strong>：尽量使用对象组合/聚合，而不是继承关系达到软件复用的目的</p><ul> <li>聚合 has-A</li> <li>组合 contains-A</li> <li>继承 is-A</li></ul><p><strong>优点</strong>：可以使系统更加灵活，降低类与类之间的耦合度，一个类的变化对其他类造成的影响相对较少</p><h4 id="何时使用合成聚合继承">何时使用合成/聚合、继承</h4><p>聚合：大雁去群的例子；笔记本和 U 盘，笔记本没了，U 盘还能独立存在组合：集成显卡和笔记本，显卡坏了，你电脑也不能用了，看不见，不能操作了</p><p>代码场景：a 类中有一个 b类的引用</p><ul> <li>聚合：除了 a 类以外，还有其他地方对 b 类的引用，就算 a 类结束了，b 还存活着</li> <li>组合：只有 a 类引用，那么当 a 类结束时， b 类跟着一起结束</li></ul><h4 id="coding">Coding</h4><p>场景：Dao 层获取数据库连接；</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBConnection</span> <span class="o">{</span> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">"使用 Mysql 数据库连接"</span><span class="o">;</span> <span class="o">}</span><span class="o">}</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProductDao</span> <span class="kd">extends</span> <span class="nc">DBConnection</span> <span class="o">{</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addProduct</span><span class="o">()</span> <span class="o">{</span> <span class="nc">String</span> <span class="n">connection</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span...<a class="read-more" href="./%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html"> read more</a>
-			</div>
-		</div>
-	
-		<div class="post">
-			
-
-			<a class="post-list-title" href="./%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html">设计模式二:外观模式</a>
-			
-
-  <span class = "post-card-meta">
-  
-  
-    <span class="meta-pre"></span>
-  
-  
-    
-      
-      <span class="page_meta-date">
-        <time datetime="2022-05-19T03:32:20+08:00">May 19, 2022</time>
-      </span>
-    
-    
-      <span class="meta-sep"></span>
-    
-  
-  
-    
-    
-    <span class="page_meta-readtime">
-      
-        less than 1 minute read
-      
-    </span>
-  
-  
-  </span>
-
-			<div class="post-excerpt">
-				<h2 id="初识外观模式">初识外观模式</h2><h3 id="定义">定义：</h3><p>为子系统中<code class="language-plaintext highlighter-rouge">一组接口</code>提供一个<code class="language-plaintext highlighter-rouge">一致的界面</code>，Facade模式定义了<code class="language-plaintext highlighter-rouge">一个高层接口</code>，这个接口使得这一子系统<code class="language-plaintext highlighter-rouge">更加容易使用</code></p><h3 id="结构和说明">结构和说明：</h3><p><img src="/assets/img/posts/20220518/design_pattern/facade/1.jpg" alt="" /></p><p><strong>界面：</strong>从客户端来看待这个系统，能看到的东西<strong>Facade ：</strong> 定义子系统的多个模块对外的高层接口，通常需要调用内部多个模块，从而<code class="language-plaintext highlighter-rouge">把客户的请求代理给适当的子系统对象</code>。<strong>模块：</strong>接收Facade对象的委派，真正实现功能，各个模块之间可能有交互。<code class="language-plaintext highlighter-rouge">☂注意：</code>Facade对象知道各个模块，但是各个模块不应该知道Facade对象</p><hr /><h2 id="体会外观模式">体会外观模式</h2><h3 id="生活中的示列组装电脑">生活中的示列：组装电脑</h3><ol> <li> <p>完全自己组装<img src="/assets/img/posts/20220518/design_pattern/facade/2.jpg" alt="" /></p> </li> <li> <p>找专业装机公司组装<img src="/assets/img/posts/20220518/design_pattern/facade/3.jpg" alt="" /></p> </li></ol><h3 id="工具示例代码生成工具">工具示例：代码生成工具</h3><p><img src="/assets/img/posts/20220518/design_pattern/facade/4.jpg" alt="" /></p><p><code class="language-plaintext highlighter-rouge">问题：</code>如果现在客户端需要使用这个代码生成工具来生成需要的基础代码，该如何来实现呢？</p><h3 id="不用模式解决方案">不用模式解决方案</h3><p><img src="/assets/img/posts/20220518/design_pattern/facade/5.jpg" alt="" /></p><p><code class="language-plaintext highlighter-rouge">存在的问题：</code>客户端为了使用生成代码的功能，需要与生成代码子系统内部的多个模块交互</p><h3 id="使用模式解决方案">使用模式解决方案</h3><p><img src="/assets/img/posts/20220518/design_pattern/facade/6.jpg" alt="" /></p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AModuleApi</span> <span class="o">{</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">();</span><span class="o">}</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AModuleImpl</span> <span class="kd">implements</span> <span class="nc">AModuleApi</span><span class="o">{</span> <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"模块a"</span><span class="o">);</span> <span...<a class="read-more" href="./%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F.html"> read more</a>
 			</div>
 		</div>
 	
